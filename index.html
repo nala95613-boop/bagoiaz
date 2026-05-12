@@ -20,25 +20,15 @@
   --gold3: #f2d285;
   --gold-dim: #9a7a2e;
   --cream: #f0e6c8;
-  --cream2: #e0d0a8;
-  --green: #4caf7d;
-  --green-bg: rgba(76,175,125,0.12);
-  --red: #e05a4a;
-  --red-bg: rgba(224,90,74,0.12);
-  --blue: #5b8dd4;
-  --blue-bg: rgba(91,141,212,0.12);
-  --orange: #e08c3a;
-  --orange-bg: rgba(224,140,58,0.12);
-  --purple: #9b6ba8;
-  --purple-bg: rgba(155,107,168,0.12);
-  --pink: #e886a8;
-  --pink-bg: rgba(232,134,168,0.12);
   --text: #e8dfc4;
   --text2: #a89c7e;
   --text3: #6b6050;
   --radius: 12px;
-  --shadow: 0 12px 48px rgba(0,0,0,0.5);
   --shadow-sm: 0 4px 12px rgba(0,0,0,0.3);
+  --green: #4caf7d;
+  --red: #e05a4a;
+  --blue: #5b8dd4;
+  --orange: #e08c3a;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -62,12 +52,11 @@ body::before {
   z-index: 0;
 }
 
-::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: var(--gold); }
 
-/* ===== HEADER ===== */
+/* HEADER */
 header {
   position: relative;
   z-index: 10;
@@ -89,13 +78,11 @@ header {
   font-family: 'Syne', sans-serif;
   font-size: 2.8rem;
   font-weight: 800;
-  color: var(--cream);
-  letter-spacing: -1px;
-  line-height: 1;
   background: linear-gradient(135deg, var(--gold), var(--gold2));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  letter-spacing: -1px;
 }
 
 .header-subtitle {
@@ -136,13 +123,6 @@ header {
   margin-top: 2px;
 }
 
-.info-value.warning {
-  color: var(--red);
-  animation: blink 1s infinite;
-}
-
-@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-
 .header-badges {
   display: flex;
   gap: 8px;
@@ -165,7 +145,7 @@ header {
 }
 
 .badge-trip {
-  background: var(--blue-bg);
+  background: rgba(91,141,212,0.12);
   color: var(--blue);
   border: 1px solid rgba(91,141,212,0.3);
   animation: pulse 2.5s ease-in-out infinite;
@@ -177,15 +157,9 @@ header {
   border: 1px solid var(--gold);
 }
 
-.badge-countdown {
-  background: var(--red-bg);
-  color: var(--red);
-  border: 1px solid rgba(224,90,74,0.3);
-}
-
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.55; } }
 
-/* ===== STATS ROW ===== */
+/* STATS */
 .stats-row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -199,23 +173,13 @@ header {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 18px;
-  position: relative;
-  overflow: hidden;
   transition: all 0.3s;
-  cursor: pointer;
 }
 
 .stat-card:hover {
   border-color: var(--gold-dim);
   transform: translateY(-3px);
   box-shadow: var(--shadow-sm);
-}
-
-.stat-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(212,168,67,0.04) 0%, transparent 60%);
 }
 
 .stat-num {
@@ -250,10 +214,9 @@ header {
   height: 100%;
   border-radius: 2px;
   transition: width 1s cubic-bezier(.4, 0, .2, 1);
-  box-shadow: 0 0 10px currentColor;
 }
 
-/* ===== GLOBAL PROGRESS ===== */
+/* PROGRESS */
 .global-progress {
   padding: 18px 36px;
   display: flex;
@@ -278,7 +241,6 @@ header {
   background: var(--surface2);
   border-radius: 6px;
   overflow: hidden;
-  position: relative;
   border: 1px solid var(--border);
 }
 
@@ -287,19 +249,7 @@ header {
   background: linear-gradient(90deg, var(--gold-dim), var(--gold), var(--gold3));
   border-radius: 6px;
   transition: width 1s cubic-bezier(.4, 0, .2, 1);
-  position: relative;
-  box-shadow: 0 0 15px rgba(212,168,67,0.4);
 }
-
-.gp-fill::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
-  animation: shimmer 2s infinite;
-}
-
-@keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
 
 .gp-pct {
   font-family: 'Syne', sans-serif;
@@ -310,14 +260,13 @@ header {
   text-align: right;
 }
 
-/* ===== TABS ===== */
+/* TABS */
 nav.tabs {
   display: flex;
   padding: 0 36px;
   background: var(--bg2);
   border-bottom: 1px solid var(--border);
   overflow-x: auto;
-  gap: 0;
   position: sticky;
   top: 0;
   z-index: 20;
@@ -340,7 +289,6 @@ nav.tabs button {
   display: flex;
   align-items: center;
   gap: 8px;
-  position: relative;
   font-weight: 700;
 }
 
@@ -376,9 +324,12 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
 
 .tab-content.active { display: block; }
 
-@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { 
+  from { opacity: 0; transform: translateY(6px); } 
+  to { opacity: 1; transform: translateY(0); } 
+}
 
-/* ===== SECTION HEADER ===== */
+/* SECTION */
 .sec-header {
   display: flex;
   align-items: center;
@@ -406,7 +357,6 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   background: linear-gradient(180deg, var(--gold), var(--gold-dim));
   border-radius: 3px;
   flex-shrink: 0;
-  box-shadow: 0 0 10px var(--gold-dim);
 }
 
 .sec-actions {
@@ -415,7 +365,7 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   flex-wrap: wrap;
 }
 
-/* ===== BUTTONS ===== */
+/* BUTTONS */
 .btn {
   font-family: 'Space Mono', monospace;
   font-size: 0.65rem;
@@ -458,31 +408,18 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
 }
 
 .btn-red {
-  background: var(--red-bg);
+  background: rgba(224,90,74,0.12);
   color: var(--red);
   border: 1px solid rgba(224,90,74,0.4);
 }
 
 .btn-red:hover {
   background: rgba(224,90,74,0.2);
-  border-color: var(--red);
-}
-
-.btn-green {
-  background: rgba(76,175,125,0.12);
-  color: var(--green);
-  border: 1px solid rgba(76,175,125,0.3);
-}
-
-.btn-green:hover {
-  background: rgba(76,175,125,0.2);
-  border-color: var(--green);
 }
 
 .btn-sm { padding: 7px 14px; font-size: 0.6rem; }
-.btn-lg { padding: 14px 24px; font-size: 0.7rem; }
 
-/* ===== BOXES GRID ===== */
+/* FILTER */
 .filter-bar {
   display: flex;
   gap: 10px;
@@ -511,6 +448,7 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   background: rgba(212,168,67,0.12);
 }
 
+/* BOXES GRID */
 .boxes-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -534,33 +472,10 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   transform: translateY(-4px);
 }
 
-.box-card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(212,168,67,0.02) 0%, transparent 100%);
-  pointer-events: none;
-}
-
-.box-card.status-empaquetada {
-  border-left: 5px solid var(--green);
-  background: linear-gradient(135deg, rgba(76,175,125,0.08) 0%, transparent 100%);
-}
-
-.box-card.status-pendiente {
-  border-left: 5px solid var(--orange);
-  background: linear-gradient(135deg, rgba(224,140,58,0.08) 0%, transparent 100%);
-}
-
-.box-card.status-llevada {
-  border-left: 5px solid var(--blue);
-  background: linear-gradient(135deg, rgba(91,141,212,0.08) 0%, transparent 100%);
-}
-
-.box-card.status-vacia {
-  border-left: 5px solid var(--text3);
-  opacity: 0.6;
-}
+.box-card.status-empaquetada { border-left: 5px solid var(--green); background: linear-gradient(135deg, rgba(76,175,125,0.08) 0%, transparent 100%); }
+.box-card.status-pendiente { border-left: 5px solid var(--orange); background: linear-gradient(135deg, rgba(224,140,58,0.08) 0%, transparent 100%); }
+.box-card.status-llevada { border-left: 5px solid var(--blue); background: linear-gradient(135deg, rgba(91,141,212,0.08) 0%, transparent 100%); }
+.box-card.status-vacia { border-left: 5px solid var(--text3); opacity: 0.6; }
 
 .box-card-top {
   display: flex;
@@ -586,16 +501,12 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   border-radius: 50%;
   flex-shrink: 0;
   margin-top: 6px;
-  box-shadow: 0 0 8px currentColor;
-  animation: pulse-dot 2s infinite;
 }
 
-@keyframes pulse-dot { 0%, 100% { box-shadow: 0 0 8px currentColor; } 50% { box-shadow: 0 0 15px currentColor; } }
-
-.dot-empaquetada { background: var(--green); color: var(--green); }
-.dot-pendiente { background: var(--orange); color: var(--orange); }
-.dot-llevada { background: var(--blue); color: var(--blue); }
-.dot-vacia { background: var(--text3); color: var(--text3); }
+.dot-empaquetada { background: var(--green); }
+.dot-pendiente { background: var(--orange); }
+.dot-llevada { background: var(--blue); }
+.dot-vacia { background: var(--text3); }
 
 .box-title {
   font-family: 'Manrope', sans-serif;
@@ -617,9 +528,9 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   flex-shrink: 0;
 }
 
-.badge-empaquetada { background: var(--green-bg); color: var(--green); }
-.badge-pendiente { background: var(--orange-bg); color: var(--orange); }
-.badge-llevada { background: var(--blue-bg); color: var(--blue); }
+.badge-empaquetada { background: rgba(76,175,125,0.12); color: var(--green); }
+.badge-pendiente { background: rgba(224,140,58,0.12); color: var(--orange); }
+.badge-llevada { background: rgba(91,141,212,0.12); color: var(--blue); }
 .badge-vacia { background: var(--surface2); color: var(--text3); }
 
 .box-meta {
@@ -708,7 +619,6 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   color: var(--text2);
   cursor: pointer;
   flex: 1;
-  transition: all 0.2s;
 }
 
 .box-item-row input:checked + label {
@@ -749,7 +659,6 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   font-size: 0.75rem;
   color: var(--text);
   outline: none;
-  transition: all 0.2s;
 }
 
 .box-item-add input:focus { border-color: var(--gold-dim); }
@@ -799,12 +708,11 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
 .add-box-card .plus {
   font-size: 2rem;
   color: var(--border2);
-  transition: color 0.3s;
 }
 
 .add-box-card:hover .plus { color: var(--gold-dim); }
 
-/* ===== MODAL ===== */
+/* MODAL */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -815,7 +723,6 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   justify-content: center;
   padding: 20px;
   backdrop-filter: blur(8px);
-  animation: fadeIn 0.2s ease;
 }
 
 .modal-overlay.open { display: flex; }
@@ -827,15 +734,9 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   padding: 32px;
   width: 100%;
   max-width: 520px;
-  box-shadow: var(--shadow);
-  animation: slideUp 0.3s ease;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.5);
   max-height: 88vh;
   overflow-y: auto;
-}
-
-@keyframes slideUp {
-  from { transform: translateY(40px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
 }
 
 .modal h3 {
@@ -896,7 +797,7 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   margin-top: 28px;
 }
 
-/* ===== CHART SECTION ===== */
+/* CHARTS */
 .charts-row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -934,8 +835,6 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   flex-wrap: wrap;
 }
 
-.donut-svg { flex-shrink: 0; }
-
 .donut-legend {
   display: flex;
   flex-direction: column;
@@ -954,7 +853,6 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   height: 11px;
   border-radius: 50%;
   flex-shrink: 0;
-  box-shadow: 0 0 10px currentColor;
 }
 
 .legend-label { color: var(--text2); flex: 1; }
@@ -986,7 +884,6 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   background: var(--bg3);
   border-radius: 10px;
   overflow: hidden;
-  position: relative;
   border: 1px solid var(--border);
 }
 
@@ -994,15 +891,6 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   height: 100%;
   border-radius: 10px;
   transition: width 1.2s cubic-bezier(.4, 0, .2, 1);
-  position: relative;
-}
-
-.bar-fill::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%);
-  animation: shimmer 2s infinite;
 }
 
 .bar-val {
@@ -1014,7 +902,7 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   font-weight: 800;
 }
 
-/* ===== TIMELINE ===== */
+/* TIMELINE */
 .timeline-outer {
   position: relative;
   padding: 20px 0;
@@ -1026,7 +914,7 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   top: 30px;
   bottom: 30px;
   width: 2px;
-  background: linear-gradient(to bottom, var(--gold-dim), var(--border), var(--border));
+  background: linear-gradient(to bottom, var(--gold-dim), var(--border));
   z-index: 0;
 }
 
@@ -1054,19 +942,16 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   background: var(--bg);
   flex-shrink: 0;
   transition: all 0.3s;
-  position: relative;
-  box-shadow: 0 0 0 5px var(--bg);
 }
 
 .tl-dot.today {
   background: var(--gold);
   border-color: var(--gold);
-  box-shadow: 0 0 0 5px var(--bg), 0 0 15px rgba(212,168,67,0.5);
+  box-shadow: 0 0 15px rgba(212,168,67,0.5);
 }
 
 .tl-dot.trip { background: var(--blue); border-color: var(--blue); }
 .tl-dot.warn { background: var(--red); border-color: var(--red); }
-.tl-dot.done-dot { background: var(--green); border-color: var(--green); }
 
 .tl-card {
   flex: 1;
@@ -1085,23 +970,8 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   box-shadow: 0 0 15px rgba(212,168,67,0.2);
 }
 
-.tl-card.highlight-trip {
-  border-color: var(--blue);
-  background: var(--blue-bg);
-}
-
-.tl-card.highlight-warn {
-  border-color: var(--red);
-  background: var(--red-bg);
-}
-
-.tl-top {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 10px;
-}
+.tl-card.highlight-trip { border-color: var(--blue); background: rgba(91,141,212,0.12); }
+.tl-card.highlight-warn { border-color: var(--red); background: rgba(224,90,74,0.12); }
 
 .tl-date {
   font-family: 'Space Mono', monospace;
@@ -1112,34 +982,13 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   font-weight: 800;
 }
 
-.tl-card.highlight-today .tl-date { color: var(--gold); }
-.tl-card.highlight-trip .tl-date { color: var(--blue); }
-.tl-card.highlight-warn .tl-date { color: var(--red); }
-
-.tl-pills {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.tl-pill {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.58rem;
-  padding: 4px 9px;
-  border-radius: 12px;
-  font-weight: 800;
-}
-
-.pill-days { background: var(--orange-bg); color: var(--orange); }
-.pill-trip { background: var(--blue-bg); color: var(--blue); }
-.pill-done { background: var(--green-bg); color: var(--green); }
-
 .tl-title {
   font-family: 'Syne', sans-serif;
   font-weight: 800;
   font-size: 1.05rem;
   color: var(--cream);
   margin-bottom: 8px;
+  margin-top: 8px;
 }
 
 .tl-desc {
@@ -1148,32 +997,10 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   line-height: 1.6;
 }
 
-.tl-bullets {
-  margin-top: 10px;
-  padding-left: 0;
-  list-style: none;
-}
-
-.tl-bullets li {
-  font-size: 0.8rem;
-  color: var(--text2);
-  padding: 4px 0;
-  display: flex;
-  gap: 8px;
-}
-
-.tl-bullets li::before {
-  content: '›';
-  color: var(--gold-dim);
-  flex-shrink: 0;
-  font-weight: 800;
-}
-
-/* ===== CLEANING ===== */
+/* CLEANING */
 .cleaning-grid {
   display: grid;
   gap: 12px;
-  margin-top: 18px;
 }
 
 .cleaning-task {
@@ -1224,7 +1051,6 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   font-size: 0.65rem;
   color: var(--text3);
   margin-top: 5px;
-  letter-spacing: 0.05em;
 }
 
 .cleaning-phase {
@@ -1237,12 +1063,12 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   font-weight: 800;
 }
 
-.phase-prep { background: var(--orange-bg); color: var(--orange); }
+.phase-prep { background: rgba(224,140,58,0.12); color: var(--orange); }
 .phase-deep { background: rgba(91,141,212,0.15); color: var(--blue); }
-.phase-final { background: var(--red-bg); color: var(--red); }
-.phase-new { background: var(--green-bg); color: var(--green); }
+.phase-final { background: rgba(224,90,74,0.12); color: var(--red); }
+.phase-new { background: rgba(76,175,125,0.12); color: var(--green); }
 
-/* ===== TRAMITES ===== */
+/* TRAMITES */
 .tramite-card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -1250,11 +1076,6 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   padding: 20px;
   margin-bottom: 16px;
   transition: all 0.3s;
-}
-
-.tramite-card.tramite-done {
-  border-left: 5px solid var(--green);
-  opacity: 0.8;
 }
 
 .tramite-card:hover {
@@ -1303,15 +1124,13 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
 }
 
 .tramite-status-btn.pendiente {
-  background: var(--orange-bg);
+  background: rgba(224,140,58,0.12);
   color: var(--orange);
-  border: 1px solid rgba(224,140,58,0.4);
 }
 
 .tramite-status-btn.hecho {
-  background: var(--green-bg);
+  background: rgba(76,175,125,0.12);
   color: var(--green);
-  border: 1px solid rgba(76,175,125,0.4);
 }
 
 .tramite-steps {
@@ -1327,7 +1146,6 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   gap: 12px;
   align-items: flex-start;
   padding: 8px 0;
-  transition: all 0.2s;
 }
 
 .tramite-step input:checked ~ .step-text {
@@ -1348,7 +1166,6 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   color: var(--text2);
   line-height: 1.5;
   flex: 1;
-  transition: all 0.2s;
 }
 
 .step-date {
@@ -1364,7 +1181,7 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
 }
 
 .tramite-info-box {
-  background: var(--orange-bg);
+  background: rgba(224,140,58,0.12);
   border: 1px solid rgba(224,140,58,0.3);
   border-radius: 8px;
   padding: 14px 16px;
@@ -1383,7 +1200,7 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   margin-top: 4px;
 }
 
-/* ===== NOTES ===== */
+/* NOTES */
 .notes-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1454,7 +1271,6 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
 
 .contact-item:hover {
   border-color: var(--gold-dim);
-  background: var(--bg3);
 }
 
 .contact-emoji { font-size: 1.3rem; }
@@ -1474,7 +1290,7 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   margin-top: 2px;
 }
 
-/* ===== BUDGET ===== */
+/* BUDGET */
 .budget-row {
   display: flex;
   align-items: center;
@@ -1548,17 +1364,14 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   color: var(--gold);
 }
 
-/* ===== PEND ITEMS ===== */
+/* PEND */
 .pend-category {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
   margin-bottom: 12px;
-  transition: all 0.3s;
 }
-
-.pend-category:hover { border-color: var(--border2); }
 
 .pend-cat-header {
   display: flex;
@@ -1658,106 +1471,7 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   font-style: italic;
 }
 
-.add-pend-row {
-  display: flex;
-  gap: 6px;
-  padding: 10px 0 4px;
-}
-
-.add-pend-row input {
-  flex: 1;
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  padding: 7px 10px;
-  font-family: 'Manrope', sans-serif;
-  font-size: 0.8rem;
-  color: var(--text);
-  outline: none;
-  transition: all 0.2s;
-}
-
-.add-pend-row input:focus { border-color: var(--gold-dim); }
-
-.add-pend-row button {
-  background: var(--gold-dim);
-  color: var(--bg);
-  border: none;
-  border-radius: 5px;
-  padding: 7px 12px;
-  cursor: pointer;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.6rem;
-  font-weight: 800;
-  transition: all 0.2s;
-}
-
-.add-pend-row button:hover { background: var(--gold); }
-
-/* ===== TOAST ===== */
-.toast {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 16px 20px;
-  color: var(--text);
-  z-index: 1000;
-  animation: slideInRight 0.3s ease;
-  font-size: 0.88rem;
-  max-width: 320px;
-  box-shadow: var(--shadow);
-  font-weight: 600;
-}
-
-@keyframes slideInRight {
-  from { transform: translateX(400px); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
-}
-
-/* ===== QUICK STATS ===== */
-.quick-stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 14px;
-  margin-top: 20px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid var(--border);
-}
-
-.quick-stat {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 14px;
-  text-align: center;
-  transition: all 0.3s;
-}
-
-.quick-stat:hover {
-  border-color: var(--gold-dim);
-  box-shadow: var(--shadow-sm);
-}
-
-.quick-stat-value {
-  font-family: 'Syne', sans-serif;
-  font-size: 1.8rem;
-  font-weight: 800;
-  color: var(--gold);
-  margin-bottom: 4px;
-}
-
-.quick-stat-label {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.62rem;
-  color: var(--text3);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-/* ===== THEME TOGGLE ===== */
+/* TOOLBAR */
 .toolbar {
   position: fixed;
   bottom: 30px;
@@ -1791,48 +1505,56 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   color: var(--bg);
 }
 
-/* ===== RESPONSIVE ===== */
+/* TOAST */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+  color: var(--text);
+  z-index: 1000;
+  font-size: 0.88rem;
+  max-width: 320px;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.5);
+  font-weight: 600;
+  animation: slideInRight 0.3s ease;
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(400px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* RESPONSIVE */
 @media (max-width: 900px) {
   header { padding: 20px 20px; }
-  .header-top { flex-direction: column; }
   .stats-row { grid-template-columns: repeat(2, 1fr); padding: 14px 20px; }
-  .global-progress { padding: 14px 20px; flex-wrap: wrap; }
   nav.tabs { padding: 0 12px; }
   .tab-content { padding: 20px 20px 50px; }
-  .charts-row { grid-template-columns: 1fr; }
-  .notes-grid { grid-template-columns: 1fr; }
   .boxes-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
-  header h1 { font-size: 2rem; }
-  .modal { max-width: 90vw; padding: 24px; }
 }
 
 @media (max-width: 600px) {
   .toolbar { bottom: 20px; left: 20px; }
   .stat-num { font-size: 1.8rem; }
-  .boxes-grid { grid-template-columns: 1fr; }
   nav.tabs { padding: 0 10px; }
   nav.tabs button { padding: 12px 10px; font-size: 0.55rem; }
-  .header-info { flex-direction: column; gap: 10px; }
-  .info-item { align-items: flex-start; }
 }
 </style>
 </head>
 <body>
 
-<!-- ===== TOOLBAR ===== -->
+<!-- TOOLBAR -->
 <div class="toolbar">
-  <button class="toolbar-btn" onclick="toggleSettings()" title="Configuración">
-    <i class="fas fa-cog"></i>
-  </button>
-  <button class="toolbar-btn" onclick="exportAllData()" title="Exportar datos">
-    <i class="fas fa-download"></i>
-  </button>
-  <button class="toolbar-btn" onclick="importDataClick()" title="Importar datos">
-    <i class="fas fa-upload"></i>
-  </button>
+  <button class="toolbar-btn" onclick="exportData()" title="Exportar"><i class="fas fa-download"></i></button>
+  <button class="toolbar-btn" onclick="importData()" title="Importar"><i class="fas fa-upload"></i></button>
+  <button class="toolbar-btn" onclick="toggleSettings()" title="Configuración"><i class="fas fa-cog"></i></button>
 </div>
 
-<!-- ===== HEADER ===== -->
+<!-- HEADER -->
 <header>
   <div class="header-top">
     <div class="header-left">
@@ -1841,7 +1563,7 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
     </div>
     <div class="header-info">
       <div class="info-item">
-        <div class="info-label">Fecha actual</div>
+        <div class="info-label">Fecha hoy</div>
         <div class="info-value" id="currentDate">12/05/2026</div>
       </div>
       <div class="info-item">
@@ -1849,21 +1571,20 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
         <div class="info-value" id="daysToTrip">13</div>
       </div>
       <div class="info-item">
-        <div class="info-label">% Completado</div>
+        <div class="info-label">% Progreso</div>
         <div class="info-value" id="percentDone">0%</div>
       </div>
     </div>
   </div>
   
   <div class="header-badges">
-    <span class="badge badge-today" id="badge-today"><i class="fas fa-map-marker-alt"></i> HOY</span>
-    <span class="badge badge-trip" id="badge-trip"><i class="fas fa-plane"></i> Viaje 25–29 Mayo</span>
-    <span class="badge badge-countdown" id="badge-countdown" style="display:none"><i class="fas fa-hourglass-end"></i> ⚠️ Últimos días</span>
+    <span class="badge badge-today"><i class="fas fa-map-marker-alt"></i> HOY</span>
+    <span class="badge badge-trip"><i class="fas fa-plane"></i> Viaje 25–29 Mayo</span>
   </div>
 </header>
 
-<!-- ===== STATS ROW ===== -->
-<div class="stats-row" id="statsRow">
+<!-- STATS -->
+<div class="stats-row">
   <div class="stat-card">
     <div class="stat-num" id="statEmpaquetadas">0</div>
     <div class="stat-label"><i class="fas fa-check-circle"></i> Empaquetadas</div>
@@ -1882,18 +1603,18 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   <div class="stat-card">
     <div class="stat-num" id="statTramites">0</div>
     <div class="stat-label"><i class="fas fa-clipboard-list"></i> Trámites</div>
-    <div class="stat-bar"><div class="stat-bar-fill" id="barTramites" style="background:var(--purple)"></div></div>
+    <div class="stat-bar"><div class="stat-bar-fill" id="barTramites" style="background:#9b6ba8"></div></div>
   </div>
 </div>
 
-<!-- GLOBAL PROGRESS -->
+<!-- PROGRESS -->
 <div class="global-progress">
   <span class="gp-label"><i class="fas fa-chart-line"></i> Progreso total</span>
   <div class="gp-track"><div class="gp-fill" id="globalProgress" style="width:0%"></div></div>
   <span class="gp-pct" id="globalPct">0%</span>
 </div>
 
-<!-- ===== TABS ===== -->
+<!-- TABS -->
 <nav class="tabs">
   <button class="active" onclick="showTab('casa',this)"><span class="tab-emoji">🏠</span>Casa<span class="tab-badge" id="badge-casa" style="display:none">0</span></button>
   <button onclick="showTab('lonja',this)"><span class="tab-emoji">🏪</span>Lonja<span class="tab-badge" id="badge-lonja" style="display:none">0</span></button>
@@ -1905,12 +1626,11 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   <button onclick="showTab('extras',this)"><span class="tab-emoji">📝</span>Notas</button>
 </nav>
 
-<!-- ===================== CASA TAB ===================== -->
+<!-- CASA TAB -->
 <div class="tab-content active" id="tab-casa">
-  <!-- Charts -->
   <div class="charts-row">
     <div class="chart-card">
-      <div class="chart-title"><i class="fas fa-chart-pie"></i> Estado del empaquetado</div>
+      <div class="chart-title"><i class="fas fa-chart-pie"></i> Estado empaquetado</div>
       <div class="donut-wrap">
         <svg class="donut-svg" width="120" height="120" viewBox="0 0 100 100" id="donutSvg">
           <circle cx="50" cy="50" r="38" fill="none" stroke="var(--border)" stroke-width="14"/>
@@ -1919,9 +1639,9 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
           <text x="50" y="54" text-anchor="middle" fill="var(--gold)" font-family="Syne,sans-serif" font-size="18" font-weight="800" id="donutPct">0%</text>
         </svg>
         <div class="donut-legend">
-          <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div><span class="legend-label">Empaquetada</span><span class="legend-count" id="lgEmpaq">0</span></div>
-          <div class="legend-item"><div class="legend-dot" style="background:var(--orange)"></div><span class="legend-label">Pendiente</span><span class="legend-count" id="lgPend">0</span></div>
-          <div class="legend-item"><div class="legend-dot" style="background:var(--text3)"></div><span class="legend-label">Vacía</span><span class="legend-count" id="lgVacia">0</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div><span class="legend-label">Empaquetadas</span><span class="legend-count" id="lgEmpaq">0</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--orange)"></div><span class="legend-label">Pendientes</span><span class="legend-count" id="lgPend">0</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--text3)"></div><span class="legend-label">Vacías</span><span class="legend-count" id="lgVacia">0</span></div>
         </div>
       </div>
     </div>
@@ -1934,37 +1654,35 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   <div class="sec-header">
     <div class="sec-title"><i class="fas fa-boxes"></i> Cajas en casa</div>
     <div class="sec-actions">
-      <button class="btn btn-gold btn-sm" onclick="openAddBoxModal()"><i class="fas fa-plus"></i> Nueva caja</button>
-      <button class="btn btn-outline btn-sm" onclick="expandAllBoxes()"><i class="fas fa-expand"></i> Ver todo</button>
-      <button class="btn btn-outline btn-sm" onclick="hideCompletedBoxes()"><i class="fas fa-eye-slash"></i> Ocultar hechas</button>
+      <button class="btn btn-gold btn-sm" onclick="openAddBoxModal()"><i class="fas fa-plus"></i> Nueva</button>
+      <button class="btn btn-outline btn-sm" onclick="expandAllBoxes()"><i class="fas fa-expand"></i> Ver</button>
     </div>
   </div>
 
-  <div class="filter-bar" id="boxFilterBar">
-    <button class="filter-btn active" data-filter="all" onclick="filterBoxes('all',this)">📌 Todas</button>
-    <button class="filter-btn" data-filter="empaquetada" onclick="filterBoxes('empaquetada',this)">✅ Empaquetadas</button>
-    <button class="filter-btn" data-filter="pendiente" onclick="filterBoxes('pendiente',this)">⏳ Pendientes</button>
-    <button class="filter-btn" data-filter="vacia" onclick="filterBoxes('vacia',this)">📭 Vacías</button>
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterBoxes('all',this)">Todas</button>
+    <button class="filter-btn" onclick="filterBoxes('empaquetada',this)">✅ Hechas</button>
+    <button class="filter-btn" onclick="filterBoxes('pendiente',this)">⏳ Pendientes</button>
+    <button class="filter-btn" onclick="filterBoxes('vacia',this)">📭 Vacías</button>
   </div>
 
   <div class="boxes-grid" id="boxesGrid"></div>
 </div>
 
-<!-- ===================== LONJA TAB ===================== -->
+<!-- LONJA TAB -->
 <div class="tab-content" id="tab-lonja">
   <div class="sec-header">
-    <div class="sec-title"><i class="fas fa-warehouse"></i> Cajas en la lonja</div>
+    <div class="sec-title"><i class="fas fa-warehouse"></i> Cajas en lonja</div>
     <div class="sec-actions">
       <button class="btn btn-outline btn-sm" onclick="exportLonjaList()"><i class="fas fa-download"></i> Exportar</button>
-      <button class="btn btn-outline btn-sm" onclick="printLonjaList()"><i class="fas fa-print"></i> Imprimir</button>
     </div>
   </div>
 
   <div class="charts-row">
     <div class="chart-card">
-      <div class="chart-title"><i class="fas fa-chart-pie"></i> Cajas en lonja</div>
+      <div class="chart-title"><i class="fas fa-chart-pie"></i> Distribución</div>
       <div class="donut-wrap">
-        <svg class="donut-svg" width="120" height="120" viewBox="0 0 100 100" id="lonjaDonut">
+        <svg width="120" height="120" viewBox="0 0 100 100" id="lonjaDonut">
           <circle cx="50" cy="50" r="38" fill="none" stroke="var(--border)" stroke-width="14"/>
           <circle cx="50" cy="50" r="38" fill="none" stroke="var(--blue)" stroke-width="14" stroke-dasharray="0 238.76" stroke-linecap="round" transform="rotate(-90 50 50)" id="lonjaDonutFill"/>
           <text x="50" y="54" text-anchor="middle" fill="var(--blue)" font-family="Syne,sans-serif" font-size="18" font-weight="800" id="lonjaDonutPct">0%</text>
@@ -1975,11 +1693,11 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
       </div>
     </div>
     <div class="chart-card">
-      <div class="chart-title"><i class="fas fa-info-circle"></i> Información</div>
-      <div style="padding: 12px 0; font-size: 0.95rem; line-height: 2; color: var(--text2);">
-        <div><strong style="color: var(--cream);">📦 Total cajas:</strong> <span id="lonjaTotal" style="color: var(--gold); font-weight: 800; font-size: 1.1rem;">0</span></div>
-        <div><strong style="color: var(--cream);">🏠 Aún en casa:</strong> <span id="lanjaNeedTransport" style="color: var(--orange); font-weight: 800; font-size: 1.1rem;">0</span></div>
-        <div><strong style="color: var(--cream);">📊 Progreso:</strong> <span id="lonjaProgress" style="color: var(--gold); font-weight: 800; font-size: 1.1rem;">0%</span></div>
+      <div class="chart-title"><i class="fas fa-info-circle"></i> Info</div>
+      <div style="padding: 12px 0; font-size: 0.95rem; line-height: 2;">
+        <div><strong style="color: var(--cream);">Total:</strong> <span id="lonjaTotal" style="color: var(--gold); font-weight: 800;">0</span></div>
+        <div><strong style="color: var(--cream);">Aún en casa:</strong> <span id="lanjaNeedTransport" style="color: var(--orange); font-weight: 800;">0</span></div>
+        <div><strong style="color: var(--cream);">Progreso:</strong> <span id="lonjaProgress" style="color: var(--gold); font-weight: 800;">0%</span></div>
       </div>
     </div>
   </div>
@@ -1987,10 +1705,10 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   <div class="boxes-grid" id="lonjaGrid"></div>
 </div>
 
-<!-- ===================== PENDIENTE TAB ===================== -->
+<!-- PENDIENTE TAB -->
 <div class="tab-content" id="tab-pendiente">
   <div class="sec-header">
-    <div class="sec-title"><i class="fas fa-list-check"></i> Qué falta empaquetar</div>
+    <div class="sec-title"><i class="fas fa-list-check"></i> Qué falta</div>
     <div class="sec-actions">
       <button class="btn btn-gold btn-sm" onclick="openAddCategoryModal()"><i class="fas fa-plus"></i> Categoría</button>
     </div>
@@ -1998,10 +1716,10 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   <div id="pendienteList"></div>
 </div>
 
-<!-- ===================== TIMELINE TAB ===================== -->
+<!-- TIMELINE TAB -->
 <div class="tab-content" id="tab-timeline">
   <div class="sec-header">
-    <div class="sec-title"><i class="fas fa-timeline"></i> Calendario de la mudanza</div>
+    <div class="sec-title"><i class="fas fa-timeline"></i> Calendario</div>
     <div class="sec-actions">
       <button class="btn btn-outline btn-sm" onclick="openAddEventModal()"><i class="fas fa-plus"></i> Evento</button>
     </div>
@@ -2012,7 +1730,7 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   </div>
 </div>
 
-<!-- ===================== LIMPIEZA TAB ===================== -->
+<!-- LIMPIEZA TAB -->
 <div class="tab-content" id="tab-limpieza">
   <div class="sec-header">
     <div class="sec-title"><i class="fas fa-broom"></i> Limpieza</div>
@@ -2046,7 +1764,7 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
           <text x="50" y="54" text-anchor="middle" fill="var(--green)" font-family="Syne,sans-serif" font-size="16" font-weight="800" id="cleanNewPct">0%</text>
         </svg>
         <div class="donut-legend">
-          <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div><span class="legend-label">Preparar piso</span><span class="legend-count" id="cleanPhaseNew">0</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div><span class="legend-label">Preparar</span><span class="legend-count" id="cleanPhaseNew">0</span></div>
         </div>
       </div>
     </div>
@@ -2063,128 +1781,86 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   <div class="cleaning-grid" id="cleaningNewList"></div>
 </div>
 
-<!-- ===================== TRAMITES TAB ===================== -->
+<!-- TRAMITES TAB -->
 <div class="tab-content" id="tab-tramites">
   <div class="sec-header">
-    <div class="sec-title"><i class="fas fa-clipboard-list"></i> Trámites administrativos</div>
+    <div class="sec-title"><i class="fas fa-clipboard-list"></i> Trámites</div>
     <div class="sec-actions">
-      <button class="btn btn-outline btn-sm" onclick="openAddTramiteModal()"><i class="fas fa-plus"></i> Trámite</button>
+      <button class="btn btn-outline btn-sm" onclick="openAddTramiteModal()"><i class="fas fa-plus"></i> Añadir</button>
     </div>
   </div>
-
-  <div class="quick-stats">
-    <div class="quick-stat">
-      <div class="quick-stat-value" id="tramites-total">0</div>
-      <div class="quick-stat-label">Total trámites</div>
-    </div>
-    <div class="quick-stat">
-      <div class="quick-stat-value" id="tramites-done">0</div>
-      <div class="quick-stat-label">Completados</div>
-    </div>
-    <div class="quick-stat">
-      <div class="quick-stat-value" id="tramites-pending">0</div>
-      <div class="quick-stat-label">Pendientes</div>
-    </div>
-  </div>
-
   <div id="tramitesList"></div>
 </div>
 
-<!-- ===================== PRESUPUESTO TAB ===================== -->
+<!-- PRESUPUESTO TAB -->
 <div class="tab-content" id="tab-presupuesto">
   <div class="sec-header">
     <div class="sec-title"><i class="fas fa-wallet"></i> Presupuesto</div>
   </div>
   <div class="chart-card" style="margin-bottom:20px">
-    <div class="chart-title"><i class="fas fa-chart-bar"></i> Desglose de gastos</div>
+    <div class="chart-title"><i class="fas fa-chart-bar"></i> Desglose</div>
     <div id="budgetBarChart" class="bar-chart"></div>
   </div>
   <div class="chart-card">
-    <div class="chart-title"><i class="fas fa-list"></i> Gastos estimados</div>
+    <div class="chart-title"><i class="fas fa-list"></i> Gastos</div>
     <div id="budgetList"></div>
     <div class="budget-total">
-      <span class="budget-total-label">💰 Total estimado</span>
+      <span class="budget-total-label">Total estimado</span>
       <span class="budget-total-num" id="budgetTotal">0 €</span>
     </div>
   </div>
 </div>
 
-<!-- ===================== NOTAS TAB ===================== -->
+<!-- NOTAS TAB -->
 <div class="tab-content" id="tab-extras">
   <div class="sec-header">
     <div class="sec-title"><i class="fas fa-sticky-note"></i> Notas & Contactos</div>
   </div>
   <div class="notes-grid">
     <div class="note-card">
-      <div class="note-card-title"><i class="fas fa-feather"></i> Notas libres</div>
-      <textarea class="note-textarea" id="notesArea" placeholder="Escribe aquí lo que necesites recordar..." rows="8" oninput="saveNotes()"></textarea>
+      <div class="note-card-title"><i class="fas fa-feather"></i> Notas</div>
+      <textarea class="note-textarea" id="notesArea" placeholder="Tus notas aquí..." oninput="saveNotes()"></textarea>
     </div>
     <div class="note-card">
-      <div class="note-card-title"><i class="fas fa-phone"></i> Contactos clave</div>
+      <div class="note-card-title"><i class="fas fa-phone"></i> Contactos</div>
       <div class="contacts-list" id="contactsList"></div>
-      <button class="btn btn-outline btn-sm" style="margin-top:10px;width:100%" onclick="openAddContactModal()"><i class="fas fa-plus"></i> Contacto</button>
+      <button class="btn btn-outline btn-sm" style="margin-top:10px;width:100%" onclick="openAddContactModal()"><i class="fas fa-plus"></i> Añadir</button>
     </div>
     <div class="note-card">
-      <div class="note-card-title"><i class="fas fa-key"></i> Datos nuevo piso</div>
-      <textarea class="note-textarea" id="newPisoNotes" placeholder="Dirección, CUPS, contrato, casero..." rows="7" oninput="saveNewPisoNotes()"></textarea>
+      <div class="note-card-title"><i class="fas fa-key"></i> Nuevo piso</div>
+      <textarea class="note-textarea" id="newPisoNotes" placeholder="Dirección, CUPS..." oninput="saveNewPisoNotes()"></textarea>
     </div>
     <div class="note-card">
-      <div class="note-card-title"><i class="fas fa-shopping-cart"></i> Lista de compra</div>
+      <div class="note-card-title"><i class="fas fa-shopping-cart"></i> Compra</div>
       <div id="shoppingList" style="margin-bottom:10px"></div>
-      <div class="add-pend-row">
-        <input type="text" id="shoppingInput" placeholder="Artículo..." onkeydown="if(event.key==='Enter')addShoppingItem()">
-        <button onclick="addShoppingItem()">+</button>
+      <div style="display:flex;gap:6px">
+        <input type="text" id="shoppingInput" placeholder="Artículo..." onkeydown="if(event.key==='Enter')addShoppingItem()" style="flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:5px;padding:7px 10px;font-family:'Manrope',sans-serif;font-size:0.8rem;color:var(--text);outline:none">
+        <button onclick="addShoppingItem()" style="background:var(--gold-dim);color:var(--bg);border:none;border-radius:5px;padding:7px 12px;cursor:pointer;font-family:'Space Mono',monospace;font-size:0.6rem;font-weight:800">+</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ===================== SETTINGS MODAL ===================== -->
-<div class="modal-overlay" id="settingsModal">
-  <div class="modal">
-    <h3><i class="fas fa-cog"></i> Configuración</h3>
-    <div style="padding: 16px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 20px;">
-      <div style="margin-bottom: 16px;">
-        <label style="font-size: 0.9rem; color: var(--text); font-weight: 600; display: flex; align-items: center; gap: 10px; cursor: pointer;">
-          <input type="checkbox" id="autoHideCompleted" onchange="toggleAutoHide()" style="width: 18px; height: 18px; cursor: pointer;">
-          Ocultar cajas completadas automáticamente
-        </label>
-      </div>
-      <div style="margin-bottom: 16px;">
-        <label style="font-size: 0.9rem; color: var(--text); font-weight: 600;">Ajustar fecha actual:</label>
-        <input type="date" id="customDate" style="width: 100%; margin-top: 8px; background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 10px; color: var(--text); font-size: 0.9rem;">
-      </div>
-    </div>
-    <div class="modal-actions">
-      <button class="btn btn-outline" onclick="closeSettings()">Cerrar</button>
-    </div>
-  </div>
-</div>
-
-<!-- ===================== ADD/EDIT MODALS ===================== -->
-
-<!-- Add Box Modal -->
+<!-- MODALS -->
 <div class="modal-overlay" id="addBoxModal">
   <div class="modal">
     <h3><i class="fas fa-box"></i> Nueva caja</h3>
     <div class="form-group"><label>Nombre</label><input type="text" id="newBoxLabel" placeholder="Ej: Caja 17"></div>
-    <div class="form-group"><label>Descripción</label><input type="text" id="newBoxTitle" placeholder="Ej: Libros salón"></div>
+    <div class="form-group"><label>Descripción</label><input type="text" id="newBoxTitle" placeholder="Ej: Libros"></div>
     <div class="form-group"><label>Estado</label>
       <select id="newBoxStatus">
-        <option value="pendiente">⏳ Pendiente</option>
-        <option value="empaquetada">✅ Empaquetada</option>
-        <option value="vacia">📭 Vacía</option>
+        <option value="pendiente">Pendiente</option>
+        <option value="empaquetada">Empaquetada</option>
       </select>
     </div>
-    <div class="form-group"><label>Contenido (uno por línea)</label><textarea id="newBoxItems" rows="3" placeholder="Libros&#10;Marcos"></textarea></div>
+    <div class="form-group"><label>Contenido</label><textarea id="newBoxItems" rows="3" placeholder="Uno por línea..."></textarea></div>
     <div class="modal-actions">
       <button class="btn btn-outline" onclick="closeModal('addBoxModal')">Cancelar</button>
-      <button class="btn btn-gold" onclick="addBox()"><i class="fas fa-check"></i> Crear</button>
+      <button class="btn btn-gold" onclick="addBox()">Crear</button>
     </div>
   </div>
 </div>
 
-<!-- Edit Box Modal -->
 <div class="modal-overlay" id="editBoxModal">
   <div class="modal">
     <h3><i class="fas fa-edit"></i> Editar caja</h3>
@@ -2193,22 +1869,20 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
     <div class="form-group"><label>Descripción</label><input type="text" id="editBoxTitle"></div>
     <div class="form-group"><label>Estado</label>
       <select id="editBoxStatus">
-        <option value="pendiente">⏳ Pendiente</option>
-        <option value="empaquetada">✅ Empaquetada</option>
-        <option value="llevada">🏪 En lonja</option>
-        <option value="vacia">📭 Vacía</option>
+        <option value="pendiente">Pendiente</option>
+        <option value="empaquetada">Empaquetada</option>
+        <option value="llevada">En lonja</option>
       </select>
     </div>
     <div class="form-group"><label>Contenido</label><textarea id="editBoxItems" rows="4"></textarea></div>
     <div class="modal-actions">
-      <button class="btn btn-red" onclick="deleteBox()"><i class="fas fa-trash"></i> Eliminar</button>
+      <button class="btn btn-red" onclick="deleteBox()">Eliminar</button>
       <button class="btn btn-outline" onclick="closeModal('editBoxModal')">Cancelar</button>
-      <button class="btn btn-gold" onclick="saveEditBox()"><i class="fas fa-save"></i> Guardar</button>
+      <button class="btn btn-gold" onclick="saveEditBox()">Guardar</button>
     </div>
   </div>
 </div>
 
-<!-- Add Category Modal -->
 <div class="modal-overlay" id="addCategoryModal">
   <div class="modal">
     <h3><i class="fas fa-folder-plus"></i> Nueva categoría</h3>
@@ -2216,38 +1890,36 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
     <div class="form-group"><label>Nombre</label><input type="text" id="newCatName" placeholder="Ej: Balcón"></div>
     <div class="modal-actions">
       <button class="btn btn-outline" onclick="closeModal('addCategoryModal')">Cancelar</button>
-      <button class="btn btn-gold" onclick="addCategory()"><i class="fas fa-check"></i> Crear</button>
+      <button class="btn btn-gold" onclick="addCategory()">Crear</button>
     </div>
   </div>
 </div>
 
-<!-- Add Event Modal -->
 <div class="modal-overlay" id="addEventModal">
   <div class="modal">
     <h3><i class="fas fa-calendar-plus"></i> Nuevo evento</h3>
-    <div class="form-group"><label>Fecha</label><input type="text" id="newEvDate" placeholder="Ej: 10 Mayo"></div>
-    <div class="form-group"><label>Título</label><input type="text" id="newEvTitle" placeholder="Ej: Llamar mudanzas"></div>
-    <div class="form-group"><label>Descripción</label><textarea id="newEvDesc" rows="2" placeholder="Detalles..."></textarea></div>
+    <div class="form-group"><label>Fecha</label><input type="text" id="newEvDate" placeholder="10 Mayo"></div>
+    <div class="form-group"><label>Título</label><input type="text" id="newEvTitle" placeholder="Evento..."></div>
+    <div class="form-group"><label>Descripción</label><textarea id="newEvDesc" rows="2"></textarea></div>
     <div class="form-group"><label>Tipo</label>
       <select id="newEvType">
         <option value="normal">Normal</option>
-        <option value="warn">⚠️ Urgente</option>
-        <option value="trip">✈️ Viaje</option>
+        <option value="warn">Urgente</option>
+        <option value="trip">Viaje</option>
       </select>
     </div>
     <div class="modal-actions">
       <button class="btn btn-outline" onclick="closeModal('addEventModal')">Cancelar</button>
-      <button class="btn btn-gold" onclick="addEvent()"><i class="fas fa-plus"></i> Añadir</button>
+      <button class="btn btn-gold" onclick="addEvent()">Añadir</button>
     </div>
   </div>
 </div>
 
-<!-- Add Cleaning Modal -->
 <div class="modal-overlay" id="addCleaningModal">
   <div class="modal">
-    <h3><i class="fas fa-plus"></i> Tarea de limpieza</h3>
-    <div class="form-group"><label>Tarea</label><input type="text" id="newCleanName" placeholder="Ej: Limpiar nevera"></div>
-    <div class="form-group"><label>Zona/Meta</label><input type="text" id="newCleanMeta" placeholder="Ej: Día antes · Cocina"></div>
+    <h3><i class="fas fa-plus"></i> Tarea limpieza</h3>
+    <div class="form-group"><label>Tarea</label><input type="text" id="newCleanName" placeholder="Limpiar..."></div>
+    <div class="form-group"><label>Zona</label><input type="text" id="newCleanMeta" placeholder="Cocina..."></div>
     <div class="form-group"><label>Fase</label>
       <select id="newCleanPhase">
         <option value="prep">Preparación</option>
@@ -2258,344 +1930,148 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
     </div>
     <div class="modal-actions">
       <button class="btn btn-outline" onclick="closeModal('addCleaningModal')">Cancelar</button>
-      <button class="btn btn-gold" onclick="addCleaningTask()"><i class="fas fa-check"></i> Añadir</button>
+      <button class="btn btn-gold" onclick="addCleaningTask()">Añadir</button>
     </div>
   </div>
 </div>
 
-<!-- Add Tramite Modal -->
 <div class="modal-overlay" id="addTramiteModal">
   <div class="modal">
     <h3><i class="fas fa-file-alt"></i> Nuevo trámite</h3>
     <div class="form-group"><label>Emoji</label><input type="text" id="newTrIcon" placeholder="📄" maxlength="4"></div>
-    <div class="form-group"><label>Nombre</label><input type="text" id="newTrName" placeholder="Ej: Cambio seguro"></div>
+    <div class="form-group"><label>Nombre</label><input type="text" id="newTrName" placeholder="Trámite..."></div>
     <div class="form-group"><label>Descripción</label><input type="text" id="newTrSub" placeholder="Detalles..."></div>
     <div class="modal-actions">
       <button class="btn btn-outline" onclick="closeModal('addTramiteModal')">Cancelar</button>
-      <button class="btn btn-gold" onclick="addTramite()"><i class="fas fa-check"></i> Añadir</button>
+      <button class="btn btn-gold" onclick="addTramite()">Añadir</button>
     </div>
   </div>
 </div>
 
-<!-- Add Contact Modal -->
 <div class="modal-overlay" id="addContactModal">
   <div class="modal">
     <h3><i class="fas fa-user-plus"></i> Nuevo contacto</h3>
     <div class="form-group"><label>Emoji</label><input type="text" id="newContactEmoji" placeholder="👤" maxlength="4"></div>
-    <div class="form-group"><label>Nombre</label><input type="text" id="newContactName" placeholder="Ej: Casero nuevo"></div>
-    <div class="form-group"><label>Teléfono/Info</label><input type="text" id="newContactDetail" placeholder="Ej: 612 345 678"></div>
+    <div class="form-group"><label>Nombre</label><input type="text" id="newContactName" placeholder="Casero..."></div>
+    <div class="form-group"><label>Teléfono</label><input type="text" id="newContactDetail" placeholder="612 345 678"></div>
     <div class="modal-actions">
       <button class="btn btn-outline" onclick="closeModal('addContactModal')">Cancelar</button>
-      <button class="btn btn-gold" onclick="addContact()"><i class="fas fa-check"></i> Añadir</button>
+      <button class="btn btn-gold" onclick="addContact()">Añadir</button>
     </div>
   </div>
 </div>
 
-<!-- Hidden file input for import -->
 <input type="file" id="fileImport" style="display:none" accept=".json" onchange="handleFileImport(event)">
 
 <script>
-// ===================== DATE & TIME =====================
-let currentDate = new Date(2026, 4, 12); // Mayo 12, 2026
+// ===== DATA =====
+let currentDate = new Date(2026, 4, 12);
 const tripStart = new Date(2026, 4, 25);
-const tripEnd = new Date(2026, 4, 29);
 
-function updateDate() {
-  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  document.getElementById('currentDate').textContent = currentDate.toLocaleDateString('es-ES', options).toUpperCase();
-  
-  const daysLeft = Math.ceil((tripStart - currentDate) / (1000 * 60 * 60 * 24));
-  document.getElementById('daysToTrip').textContent = Math.max(0, daysLeft);
-  
-  // Show warning if less than 5 days
-  const badge = document.getElementById('badge-countdown');
-  if(daysLeft <= 5 && daysLeft > 0) badge.style.display = 'flex';
-  else badge.style.display = 'none';
-  
-  if(document.getElementById('customDate')) {
-    document.getElementById('customDate').value = currentDate.toISOString().split('T')[0];
-  }
-}
-
-function setCustomDate(dateStr) {
-  currentDate = new Date(dateStr + 'T00:00:00');
-  updateDate();
-  updateStats();
-}
-
-// ===================== DATA =====================
 let BOXES = [
-  {id:1,label:'Caja 1',status:'empaquetada',summary:'Salón varios',items:['Rumba','Mosquiteras','Esterillas']},
+  {id:1,label:'Caja 1',status:'empaquetada',summary:'Salón',items:['Rumba','Mosquiteras']},
   {id:2,label:'Caja 2',status:'empaquetada',summary:'Vajilla',items:['Vajilla']},
-  {id:3,label:'Caja 3',status:'empaquetada',summary:'Belleza',items:['Maquillaje','Bisutería','Skincare']},
-  {id:4,label:'Caja 4',status:'empaquetada',summary:'Decoración',items:['Decoración']},
-  {id:5,label:'Caja 5',status:'empaquetada',summary:'Mesita',items:['Mesita de noche']},
-  {id:6,label:'Caja 6',status:'empaquetada',summary:'Hobbies',items:['Go Pro','Ceras']},
-  {id:7,label:'Caja 7',status:'empaquetada',summary:'Bienestar',items:['Masajeador']},
-  {id:8,label:'Caja 8',status:'empaquetada',summary:'Higiene',items:['Higiene','Oficina']},
-  {id:9,label:'Caja 9',status:'empaquetada',summary:'Cocina',items:['Aparatos']},
-  {id:10,label:'Caja 10',status:'empaquetada',summary:'Ropa verano',items:['Vestidos']},
-  {id:11,label:'Caja 11',status:'pendiente',summary:'Pendiente',items:[]},
+  {id:3,label:'Caja 3',status:'empaquetada',summary:'Belleza',items:['Maquillaje']},
 ];
-
 let nextBoxId = 100;
-let hideCompleted = false;
-let autoHideCompleted = false;
 
 let PENDIENTE = [
-  {cat:'Cocina',icon:'🍳',items:[
-    {text:'Ollas y sartenes',nota:'Dejar 1 para últimos días'},
-    {text:'Cubiertos',nota:''},
-    {text:'Vasos',nota:''},
-  ]},
-  {cat:'Baño',icon:'🚿',items:[
-    {text:'Toallas de reserva',nota:''},
-    {text:'Secador',nota:''},
-  ]},
-  {cat:'Dormitorio',icon:'🛏',items:[
-    {text:'Ropa de cama',nota:''},
-    {text:'Almohadas',nota:''},
-  ]},
+  {cat:'Cocina',icon:'🍳',items:[{text:'Ollas',nota:''}]},
+  {cat:'Baño',icon:'🚿',items:[{text:'Toallas',nota:''}]},
 ];
 
 let TIMELINE_EVENTS = [
-  {date:'08 Mayo',title:'🚀 ¡Arranca!',type:'today',desc:'Primer transporte a la lonja.',bullets:[]},
-  {date:'11 Mayo',title:'🚗 Transporte',type:'warn',days:0,desc:'Primer gran movimiento.',bullets:[]},
-  {date:'25-29 Mayo',title:'✈️ Viaje',type:'trip',days:13,desc:'Fuera de Bilbao.',bullets:[]},
+  {date:'08 Mayo',title:'🚀 Arranca',type:'today',desc:'Mudanza iniciada',bullets:[]},
+  {date:'25 Mayo',title:'✈️ Viaje',type:'trip',days:13,desc:'Fuera de Bilbao',bullets:[]},
 ];
 
 let CLEANING_OLD = [
   {id:'co1',name:'Nevera',meta:'Cocina',phase:'prep',done:false},
   {id:'co2',name:'Horno',meta:'Cocina',phase:'deep',done:false},
-  {id:'co3',name:'Baños',meta:'Todo',phase:'deep',done:false},
 ];
 
 let CLEANING_NEW = [
-  {id:'cn1',name:'Revisar estado',meta:'Primer día',phase:'new',done:false},
-  {id:'cn2',name:'Fotos',meta:'Importante',phase:'new',done:false},
+  {id:'cn1',name:'Revisar',meta:'Primer día',phase:'new',done:false},
 ];
 
 let TRAMITES = [
-  {icon:'⚡',name:'Endesa',sub:'Cambio titularidad',status:'pendiente',steps:[
-    {num:'01',text:'Localizar CUPS',date:'16/05',done:false},
-    {num:'02',text:'Solicitar cambio',date:'17/05',done:false},
-  ],info:''},
-  {icon:'📱',name:'DIGI',sub:'Baja línea',status:'pendiente',steps:[
-    {num:'01',text:'Solicitar baja',date:'19/05',done:false},
-  ],info:''},
+  {icon:'⚡',name:'Endesa',sub:'Cambio titularidad',status:'pendiente',steps:[{num:'01',text:'CUPS',date:'16/05',done:false}],info:''},
+  {icon:'📱',name:'DIGI',sub:'Baja línea',status:'pendiente',steps:[{num:'01',text:'Baja',date:'19/05',done:false}],info:''},
 ];
 
 let BUDGET = [
   {name:'Mudanzas',cat:'transporte',amount:300},
   {name:'Embalaje',cat:'materiales',amount:50},
-  {name:'Cerraduras',cat:'nuevo',amount:80},
-  {name:'Limpieza',cat:'limpieza',amount:25},
 ];
 
 let CONTACTS = [
   {emoji:'🏠',name:'Casero viejo',detail:''},
-  {emoji:'🏡',name:'Casero nuevo',detail:''},
 ];
 
 let SHOPPING_LIST = [];
 let pendChecks = {};
 
-// ===================== LOCAL STORAGE =====================
-function saveAll(){
-  localStorage.setItem('mudanza_boxes',JSON.stringify(BOXES));
-  localStorage.setItem('mudanza_pendiente',JSON.stringify(PENDIENTE));
-  localStorage.setItem('mudanza_events',JSON.stringify(TIMELINE_EVENTS));
-  localStorage.setItem('mudanza_cleaning_old',JSON.stringify(CLEANING_OLD));
-  localStorage.setItem('mudanza_cleaning_new',JSON.stringify(CLEANING_NEW));
-  localStorage.setItem('mudanza_tramites',JSON.stringify(TRAMITES));
-  localStorage.setItem('mudanza_budget',JSON.stringify(BUDGET));
-  localStorage.setItem('mudanza_contacts',JSON.stringify(CONTACTS));
-  localStorage.setItem('mudanza_shopping',JSON.stringify(SHOPPING_LIST));
-  localStorage.setItem('mudanza_notes',document.getElementById('notesArea').value);
-  localStorage.setItem('mudanza_newpiso',document.getElementById('newPisoNotes').value);
-  localStorage.setItem('mudanza_hideCompleted',hideCompleted);
-  localStorage.setItem('mudanza_pendchecks',JSON.stringify(pendChecks));
+// ===== FUNCTIONS =====
+function updateDate() {
+  const d = currentDate.toLocaleDateString('es-ES');
+  document.getElementById('currentDate').textContent = d;
+  const daysLeft = Math.ceil((tripStart - currentDate) / (1000*60*60*24));
+  document.getElementById('daysToTrip').textContent = Math.max(0, daysLeft);
 }
 
-function loadAll(){
-  if(localStorage.getItem('mudanza_boxes')) BOXES=JSON.parse(localStorage.getItem('mudanza_boxes'));
-  if(localStorage.getItem('mudanza_pendiente')) PENDIENTE=JSON.parse(localStorage.getItem('mudanza_pendiente'));
-  if(localStorage.getItem('mudanza_events')) TIMELINE_EVENTS=JSON.parse(localStorage.getItem('mudanza_events'));
-  if(localStorage.getItem('mudanza_cleaning_old')) CLEANING_OLD=JSON.parse(localStorage.getItem('mudanza_cleaning_old'));
-  if(localStorage.getItem('mudanza_cleaning_new')) CLEANING_NEW=JSON.parse(localStorage.getItem('mudanza_cleaning_new'));
-  if(localStorage.getItem('mudanza_tramites')) TRAMITES=JSON.parse(localStorage.getItem('mudanza_tramites'));
-  if(localStorage.getItem('mudanza_budget')) BUDGET=JSON.parse(localStorage.getItem('mudanza_budget'));
-  if(localStorage.getItem('mudanza_contacts')) CONTACTS=JSON.parse(localStorage.getItem('mudanza_contacts'));
-  if(localStorage.getItem('mudanza_shopping')) SHOPPING_LIST=JSON.parse(localStorage.getItem('mudanza_shopping'));
-  if(localStorage.getItem('mudanza_pendchecks')) pendChecks=JSON.parse(localStorage.getItem('mudanza_pendchecks'));
-  if(localStorage.getItem('mudanza_notes')) document.getElementById('notesArea').value=localStorage.getItem('mudanza_notes');
-  if(localStorage.getItem('mudanza_newpiso')) document.getElementById('newPisoNotes').value=localStorage.getItem('mudanza_newpiso');
-  if(localStorage.getItem('mudanza_hideCompleted')) hideCompleted=localStorage.getItem('mudanza_hideCompleted')==='true';
+function saveAll() {
+  localStorage.setItem('mudanza_boxes', JSON.stringify(BOXES));
+  localStorage.setItem('mudanza_pendiente', JSON.stringify(PENDIENTE));
+  localStorage.setItem('mudanza_events', JSON.stringify(TIMELINE_EVENTS));
+  localStorage.setItem('mudanza_cleaning_old', JSON.stringify(CLEANING_OLD));
+  localStorage.setItem('mudanza_cleaning_new', JSON.stringify(CLEANING_NEW));
+  localStorage.setItem('mudanza_tramites', JSON.stringify(TRAMITES));
+  localStorage.setItem('mudanza_budget', JSON.stringify(BUDGET));
+  localStorage.setItem('mudanza_contacts', JSON.stringify(CONTACTS));
+  localStorage.setItem('mudanza_shopping', JSON.stringify(SHOPPING_LIST));
+  localStorage.setItem('mudanza_notes', document.getElementById('notesArea').value);
+  localStorage.setItem('mudanza_newpiso', document.getElementById('newPisoNotes').value);
 }
 
-function saveNotes(){localStorage.setItem('mudanza_notes',document.getElementById('notesArea').value)}
-function saveNewPisoNotes(){localStorage.setItem('mudanza_newpiso',document.getElementById('newPisoNotes').value)}
-
-// ===================== EXPORT/IMPORT =====================
-function exportAllData(){
-  const data = {
-    boxes: BOXES,
-    pendiente: PENDIENTE,
-    events: TIMELINE_EVENTS,
-    cleaning_old: CLEANING_OLD,
-    cleaning_new: CLEANING_NEW,
-    tramites: TRAMITES,
-    budget: BUDGET,
-    contacts: CONTACTS,
-    shopping: SHOPPING_LIST,
-    notes: document.getElementById('notesArea').value,
-    newpiso: document.getElementById('newPisoNotes').value,
-    date: currentDate.toISOString(),
-  };
-  
-  const json = JSON.stringify(data, null, 2);
-  const blob = new Blob([json], {type: 'application/json'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `mudanza-backup-${new Date().toISOString().split('T')[0]}.json`;
-  a.click();
-  showToast('✓ Datos exportados');
+function loadAll() {
+  if(localStorage.getItem('mudanza_boxes')) BOXES = JSON.parse(localStorage.getItem('mudanza_boxes'));
+  if(localStorage.getItem('mudanza_pendiente')) PENDIENTE = JSON.parse(localStorage.getItem('mudanza_pendiente'));
+  if(localStorage.getItem('mudanza_events')) TIMELINE_EVENTS = JSON.parse(localStorage.getItem('mudanza_events'));
+  if(localStorage.getItem('mudanza_cleaning_old')) CLEANING_OLD = JSON.parse(localStorage.getItem('mudanza_cleaning_old'));
+  if(localStorage.getItem('mudanza_cleaning_new')) CLEANING_NEW = JSON.parse(localStorage.getItem('mudanza_cleaning_new'));
+  if(localStorage.getItem('mudanza_tramites')) TRAMITES = JSON.parse(localStorage.getItem('mudanza_tramites'));
+  if(localStorage.getItem('mudanza_budget')) BUDGET = JSON.parse(localStorage.getItem('mudanza_budget'));
+  if(localStorage.getItem('mudanza_contacts')) CONTACTS = JSON.parse(localStorage.getItem('mudanza_contacts'));
+  if(localStorage.getItem('mudanza_shopping')) SHOPPING_LIST = JSON.parse(localStorage.getItem('mudanza_shopping'));
+  if(localStorage.getItem('mudanza_notes')) document.getElementById('notesArea').value = localStorage.getItem('mudanza_notes');
+  if(localStorage.getItem('mudanza_newpiso')) document.getElementById('newPisoNotes').value = localStorage.getItem('mudanza_newpiso');
+  if(localStorage.getItem('mudanza_pendchecks')) pendChecks = JSON.parse(localStorage.getItem('mudanza_pendchecks'));
 }
 
-function importDataClick(){
-  document.getElementById('fileImport').click();
-}
+function saveNotes() { localStorage.setItem('mudanza_notes', document.getElementById('notesArea').value); }
+function saveNewPisoNotes() { localStorage.setItem('mudanza_newpiso', document.getElementById('newPisoNotes').value); }
 
-function handleFileImport(event){
-  const file = event.target.files[0];
-  if(!file) return;
-  
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    try {
-      const data = JSON.parse(e.target.result);
-      BOXES = data.boxes || BOXES;
-      PENDIENTE = data.pendiente || PENDIENTE;
-      TIMELINE_EVENTS = data.events || TIMELINE_EVENTS;
-      CLEANING_OLD = data.cleaning_old || CLEANING_OLD;
-      CLEANING_NEW = data.cleaning_new || CLEANING_NEW;
-      TRAMITES = data.tramites || TRAMITES;
-      BUDGET = data.budget || BUDGET;
-      CONTACTS = data.contacts || CONTACTS;
-      SHOPPING_LIST = data.shopping || SHOPPING_LIST;
-      if(data.notes) document.getElementById('notesArea').value = data.notes;
-      if(data.newpiso) document.getElementById('newPisoNotes').value = data.newpiso;
-      if(data.date) currentDate = new Date(data.date);
-      
-      saveAll();
-      updateDate();
-      renderAll();
-      showToast('✓ Datos importados correctamente');
-    } catch(err) {
-      showToast('❌ Error al importar archivo',true);
-    }
-  };
-  reader.readAsText(file);
-  event.target.value = '';
-}
-
-// ===================== TOAST =====================
-function showToast(msg, isError=false){
-  const toast=document.createElement('div');
-  toast.className='toast';
-  if(isError) toast.style.borderLeft='4px solid var(--red)';
-  else toast.style.borderLeft='4px solid var(--gold)';
-  toast.textContent=msg;
+function showToast(msg) {
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.textContent = msg;
   document.body.appendChild(toast);
-  setTimeout(()=>{
-    toast.style.opacity='0';
-    setTimeout(()=>toast.remove(),300);
-  },3000);
+  setTimeout(() => toast.remove(), 3000);
 }
 
-// ===================== TABS =====================
-function showTab(id, btn){
-  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.remove('active'));
-  document.getElementById('tab-'+id).classList.add('active');
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('nav.tabs button').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
   if(btn) btn.classList.add('active');
   if(id === 'lonja') renderLonja();
-  if(id === 'tramites') updateTramiteStats();
 }
 
-// ===================== SETTINGS =====================
-function toggleSettings(){
-  document.getElementById('settingsModal').classList.add('open');
-}
-
-function closeSettings(){
-  const dateInput = document.getElementById('customDate').value;
-  if(dateInput) setCustomDate(dateInput);
-  document.getElementById('settingsModal').classList.remove('open');
-}
-
-function toggleAutoHide(){
-  autoHideCompleted = document.getElementById('autoHideCompleted').checked;
-}
-
-// ===================== STATS =====================
-function updateStats(){
-  const total = BOXES.length;
-  const empaq = BOXES.filter(b => b.status === 'empaquetada').length;
-  const llev = BOXES.filter(b => b.status === 'llevada').length;
-  const pend = BOXES.filter(b => b.status === 'pendiente').length;
-  const vac = BOXES.filter(b => b.status === 'vacia').length;
-
-  document.getElementById('statEmpaquetadas').textContent = empaq;
-  document.getElementById('statLlevadas').textContent = llev;
-  document.getElementById('statPendientes').textContent = pend;
-  
-  const doneTram = TRAMITES.filter(t => t.status === 'hecho').length;
-  document.getElementById('statTramites').textContent = doneTram;
-  
-  document.getElementById('barEmpaquetadas').style.width = Math.round(empaq/total*100) + '%';
-  document.getElementById('barLlevadas').style.width = Math.round(llev/total*100) + '%';
-  document.getElementById('barPendientes').style.width = Math.round(pend/total*100) + '%';
-  document.getElementById('barTramites').style.width = Math.round(doneTram/TRAMITES.length*100) + '%';
-
-  const done = empaq + llev;
-  const pct = Math.round(done/total*100);
-  document.getElementById('globalProgress').style.width = pct + '%';
-  document.getElementById('globalPct').textContent = pct + '%';
-  document.getElementById('percentDone').textContent = pct + '%';
-
-  const circ = 238.76;
-  const gPct = empaq/total*circ;
-  const oPct = pend/total*circ;
-  document.getElementById('donutGreen').setAttribute('stroke-dasharray', gPct + ' ' + (circ-gPct));
-  document.getElementById('donutOrange').setAttribute('stroke-dasharray', oPct + ' ' + (circ-oPct));
-  document.getElementById('donutOrange').setAttribute('transform', `rotate(${-90+gPct/circ*360} 50 50)`);
-  document.getElementById('donutPct').textContent = pct + '%';
-
-  document.getElementById('lgEmpaq').textContent = empaq;
-  document.getElementById('lgPend').textContent = pend;
-  document.getElementById('lgVacia').textContent = vac;
-
-  updateTabBadges();
-}
-
-function updateTabBadges(){
-  const casaCount = BOXES.filter(b => b.status !== 'llevada').length;
-  const lonjaCount = BOXES.filter(b => b.status === 'llevada').length;
-  const tramCount = TRAMITES.filter(t => t.status === 'pendiente').length;
-  
-  const b1 = document.getElementById('badge-casa');
-  const b2 = document.getElementById('badge-lonja');
-  const b3 = document.getElementById('badge-tramites');
-  
-  if(casaCount > 0) { b1.style.display = 'inline-block'; b1.textContent = casaCount; } else b1.style.display = 'none';
-  if(lonjaCount > 0) { b2.style.display = 'inline-block'; b2.textContent = lonjaCount; } else b2.style.display = 'none';
-  if(tramCount > 0) { b3.style.display = 'inline-block'; b3.textContent = tramCount; } else b3.style.display = 'none';
-}
-
-// ===================== RENDER =====================
-function renderAll(){
+// ===== RENDER ALL =====
+function renderAll() {
   updateStats();
   renderCajas();
   renderPendiente();
@@ -2607,25 +2083,77 @@ function renderAll(){
   renderShopping();
 }
 
-// ===== CAJAS =====
+// ===== STATS =====
+function updateStats() {
+  const total = BOXES.length;
+  const empaq = BOXES.filter(b => b.status === 'empaquetada').length;
+  const llev = BOXES.filter(b => b.status === 'llevada').length;
+  const pend = BOXES.filter(b => b.status === 'pendiente').length;
+  const vac = BOXES.filter(b => b.status === 'vacia').length;
+
+  document.getElementById('statEmpaquetadas').textContent = empaq;
+  document.getElementById('statLlevadas').textContent = llev;
+  document.getElementById('statPendientes').textContent = pend;
+  
+  const done = empaq + llev;
+  const pct = Math.round(done / total * 100);
+  document.getElementById('globalProgress').style.width = pct + '%';
+  document.getElementById('globalPct').textContent = pct + '%';
+  document.getElementById('percentDone').textContent = pct + '%';
+
+  document.getElementById('barEmpaquetadas').style.width = Math.round(empaq / total * 100) + '%';
+  document.getElementById('barLlevadas').style.width = Math.round(llev / total * 100) + '%';
+  document.getElementById('barPendientes').style.width = Math.round(pend / total * 100) + '%';
+
+  const circ = 238.76;
+  const gPct = empaq / total * circ;
+  const oPct = pend / total * circ;
+  document.getElementById('donutGreen').setAttribute('stroke-dasharray', gPct + ' ' + (circ - gPct));
+  document.getElementById('donutOrange').setAttribute('stroke-dasharray', oPct + ' ' + (circ - oPct));
+  document.getElementById('donutOrange').setAttribute('transform', `rotate(${-90 + gPct / circ * 360} 50 50)`);
+  document.getElementById('donutPct').textContent = pct + '%';
+
+  document.getElementById('lgEmpaq').textContent = empaq;
+  document.getElementById('lgPend').textContent = pend;
+  document.getElementById('lgVacia').textContent = vac;
+
+  // Tab badges
+  const casa = BOXES.filter(b => b.status !== 'llevada').length;
+  const lonja = BOXES.filter(b => b.status === 'llevada').length;
+  const tram = TRAMITES.filter(t => t.status === 'pendiente').length;
+
+  const b1 = document.getElementById('badge-casa');
+  const b2 = document.getElementById('badge-lonja');
+  const b3 = document.getElementById('badge-tramites');
+
+  if(casa > 0) { b1.style.display = 'inline-block'; b1.textContent = casa; } else b1.style.display = 'none';
+  if(lonja > 0) { b2.style.display = 'inline-block'; b2.textContent = lonja; } else b2.style.display = 'none';
+  if(tram > 0) { b3.style.display = 'inline-block'; b3.textContent = tram; } else b3.style.display = 'none';
+
+  const doneTram = TRAMITES.filter(t => t.status === 'hecho').length;
+  document.getElementById('statTramites').textContent = doneTram;
+  document.getElementById('barTramites').style.width = Math.round(doneTram / TRAMITES.length * 100) + '%';
+}
+
+// ===== BOXES =====
 let currentFilter = 'all';
 
-function renderCajas(){
+function renderCajas() {
   const grid = document.getElementById('boxesGrid');
   grid.innerHTML = '';
   let filtered = BOXES.filter(b => b.status !== 'llevada');
   if(currentFilter !== 'all') filtered = filtered.filter(b => b.status === currentFilter);
-  if(hideCompleted || autoHideCompleted) filtered = filtered.filter(b => b.status !== 'empaquetada');
   
   filtered.forEach(box => {
     const card = document.createElement('div');
     card.className = `box-card status-${box.status}`;
-    const itemsHtml = box.items.map((item,i) => `
+    const itemsHtml = box.items.map((item, i) => `
       <div class="box-item-row">
-        <input type="checkbox" id="bi-${box.id}-${i}" ${box.itemChecks&&box.itemChecks[i]?'checked':''} onchange="toggleItemCheck(${JSON.stringify(box.id)},${i},this.checked)">
+        <input type="checkbox" id="bi-${box.id}-${i}" ${box.itemChecks && box.itemChecks[i] ? 'checked' : ''} onchange="toggleItemCheck(${box.id}, ${i}, this.checked)">
         <label for="bi-${box.id}-${i}">${item}</label>
       </div>
     `).join('');
+    
     card.innerHTML = `
       <div class="box-card-top">
         <div class="box-status-dot dot-${box.status}"></div>
@@ -2639,67 +2167,60 @@ function renderCajas(){
         <div class="box-meta-item"><i class="fas fa-list"></i> ${box.items.length}</div>
       </div>
       <div class="box-actions">
-        <button class="box-status-btn${box.status==='empaquetada'?' active-btn':''}" onclick="setBoxStatus(${JSON.stringify(box.id)},'empaquetada')" title="✓ Empaquetada">✓</button>
-        <button class="box-status-btn" onclick="setBoxStatus(${JSON.stringify(box.id)},'llevada')" title="🚗 A lonja">🚗</button>
-        <button class="box-status-btn${box.status==='pendiente'?' active-btn':''}" onclick="setBoxStatus(${JSON.stringify(box.id)},'pendiente')" title="⏳ Pendiente">⏳</button>
-        <button class="box-status-btn" onclick="openEditBoxModal(${JSON.stringify(box.id)})" title="✏️ Editar">✏️</button>
+        <button class="box-status-btn${box.status==='empaquetada'?' active-btn':''}" onclick="setBoxStatus(${box.id},'empaquetada')">✓</button>
+        <button class="box-status-btn" onclick="setBoxStatus(${box.id},'llevada')">🚗</button>
+        <button class="box-status-btn${box.status==='pendiente'?' active-btn':''}" onclick="setBoxStatus(${box.id},'pendiente')">⏳</button>
+        <button class="box-status-btn" onclick="openEditBoxModal(${box.id})">✏️</button>
       </div>
-      ${box.items.length?`
-        <button class="box-toggle-btn" onclick="toggleBoxItems(${JSON.stringify(box.id)},this)" id="toggle-${box.id}">▾ Contenido</button>
+      ${box.items.length ? `
+        <button class="box-toggle-btn" onclick="toggleBoxItems(${box.id}, this)">▾ Ver</button>
         <div class="box-items-section" id="items-${box.id}">
           ${itemsHtml}
           <div class="box-item-add">
-            <input type="text" placeholder="Artículo..." id="newItem-${box.id}" onkeydown="if(event.key==='Enter')addBoxItem(${JSON.stringify(box.id)})">
-            <button onclick="addBoxItem(${JSON.stringify(box.id)})">+</button>
+            <input type="text" placeholder="Artículo..." id="newItem-${box.id}" onkeydown="if(event.key==='Enter')addBoxItem(${box.id})">
+            <button onclick="addBoxItem(${box.id})">+</button>
           </div>
         </div>
-      `:``}
+      ` : ''}
     `;
     grid.appendChild(card);
   });
   
-  const addCard = document.createElement('div');
-  addCard.className = 'add-box-card';
-  addCard.onclick = openAddBoxModal;
-  addCard.innerHTML = '<div class="plus">＋</div><span>Nueva caja</span>';
-  grid.appendChild(addCard);
+  const add = document.createElement('div');
+  add.className = 'add-box-card';
+  add.onclick = () => openModal('addBoxModal');
+  add.innerHTML = '<div class="plus">＋</div><span>Nueva caja</span>';
+  grid.appendChild(add);
 }
 
-function filterBoxes(filter, btn){
+function filterBoxes(filter, btn) {
   currentFilter = filter;
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   renderCajas();
 }
 
-function toggleBoxItems(id, btn){
+function toggleBoxItems(id, btn) {
   const el = document.getElementById('items-' + id);
   el.classList.toggle('open');
 }
 
-function expandAllBoxes(){
+function expandAllBoxes() {
   document.querySelectorAll('.box-items-section').forEach(el => el.classList.add('open'));
 }
 
-function hideCompletedBoxes(){
-  hideCompleted = !hideCompleted;
-  saveAll();
-  renderCajas();
-}
-
-function setBoxStatus(id, status){
-  const box = BOXES.find(b => String(b.id) === String(id));
+function setBoxStatus(id, status) {
+  const box = BOXES.find(b => b.id === id);
   if(box) {
     box.status = status;
     saveAll();
     renderCajas();
-    if(status === 'llevada') showToast('🚗 Caja movida a lonja');
-    else showToast('← Caja devuelta');
+    showToast(status === 'llevada' ? '🚗 A lonja' : '← De vuelta');
   }
 }
 
-function toggleItemCheck(boxId, idx, checked){
-  const box = BOXES.find(b => String(b.id) === String(boxId));
+function toggleItemCheck(boxId, idx, checked) {
+  const box = BOXES.find(b => b.id === boxId);
   if(box) {
     if(!box.itemChecks) box.itemChecks = {};
     box.itemChecks[idx] = checked;
@@ -2707,49 +2228,45 @@ function toggleItemCheck(boxId, idx, checked){
   }
 }
 
-function addBoxItem(boxId){
+function addBoxItem(boxId) {
   const input = document.getElementById('newItem-' + boxId);
   if(!input || !input.value.trim()) return;
-  const box = BOXES.find(b => String(b.id) === String(boxId));
+  const box = BOXES.find(b => b.id === boxId);
   if(box) {
     box.items.push(input.value.trim());
     input.value = '';
     saveAll();
     renderCajas();
-    showToast('✓ Artículo añadido');
   }
 }
 
-function openAddBoxModal(){ document.getElementById('addBoxModal').classList.add('open') }
-function openEditBoxModal(id){
-  const box = BOXES.find(b => String(b.id) === String(id));
+function openAddBoxModal() { openModal('addBoxModal'); }
+function openEditBoxModal(id) {
+  const box = BOXES.find(b => b.id === id);
   if(!box) return;
   document.getElementById('editBoxId').value = id;
   document.getElementById('editBoxLabel').value = box.label;
   document.getElementById('editBoxTitle').value = box.summary;
   document.getElementById('editBoxStatus').value = box.status;
   document.getElementById('editBoxItems').value = box.items.join('\n');
-  document.getElementById('editBoxModal').classList.add('open');
+  openModal('editBoxModal');
 }
 
-function addBox(){
+function addBox() {
   const label = document.getElementById('newBoxLabel').value.trim();
   const title = document.getElementById('newBoxTitle').value.trim();
-  if(!label || !title) { showToast('❌ Rellena todos los campos',true); return; }
+  if(!label || !title) { showToast('❌ Rellena campos'); return; }
   const items = document.getElementById('newBoxItems').value.split('\n').filter(s => s.trim());
-  BOXES.push({id:nextBoxId++, label, summary:title, status:document.getElementById('newBoxStatus').value, items});
+  BOXES.push({id: nextBoxId++, label, summary: title, status: document.getElementById('newBoxStatus').value, items});
   closeModal('addBoxModal');
   saveAll();
   renderCajas();
-  document.getElementById('newBoxLabel').value = '';
-  document.getElementById('newBoxTitle').value = '';
-  document.getElementById('newBoxItems').value = '';
   showToast('✓ Caja creada');
 }
 
-function saveEditBox(){
-  const id = document.getElementById('editBoxId').value;
-  const box = BOXES.find(b => String(b.id) === String(id));
+function saveEditBox() {
+  const id = parseInt(document.getElementById('editBoxId').value);
+  const box = BOXES.find(b => b.id === id);
   if(!box) return;
   box.label = document.getElementById('editBoxLabel').value.trim();
   box.summary = document.getElementById('editBoxTitle').value.trim();
@@ -2758,34 +2275,28 @@ function saveEditBox(){
   closeModal('editBoxModal');
   saveAll();
   renderCajas();
-  showToast('✓ Caja actualizada');
+  showToast('✓ Actualizada');
 }
 
-function deleteBox(){
-  if(!confirm('¿Eliminar esta caja?')) return;
-  const id = document.getElementById('editBoxId').value;
-  BOXES = BOXES.filter(b => String(b.id) !== String(id));
+function deleteBox() {
+  if(!confirm('¿Eliminar?')) return;
+  const id = parseInt(document.getElementById('editBoxId').value);
+  BOXES = BOXES.filter(b => b.id !== id);
   closeModal('editBoxModal');
   saveAll();
   renderCajas();
-  showToast('🗑️ Caja eliminada');
+  showToast('🗑️ Eliminada');
 }
 
 // ===== LONJA =====
-function renderLonja(){
+function renderLonja() {
   const grid = document.getElementById('lonjaGrid');
   grid.innerHTML = '';
-  const lonjaBoxes = BOXES.filter(b => b.status === 'llevada');
+  const lonja = BOXES.filter(b => b.status === 'llevada');
   
-  lonjaBoxes.forEach(box => {
+  lonja.forEach(box => {
     const card = document.createElement('div');
     card.className = `box-card status-llevada`;
-    const itemsHtml = box.items.map((item,i) => `
-      <div class="box-item-row">
-        <input type="checkbox" id="bi-${box.id}-${i}" ${box.itemChecks&&box.itemChecks[i]?'checked':''} onchange="toggleItemCheck(${JSON.stringify(box.id)},${i},this.checked)">
-        <label for="bi-${box.id}-${i}">${item}</label>
-      </div>
-    `).join('');
     card.innerHTML = `
       <div class="box-card-top">
         <div class="box-status-dot dot-llevada"></div>
@@ -2795,19 +2306,11 @@ function renderLonja(){
         </div>
         <span class="box-badge badge-llevada">🏪</span>
       </div>
-      <div class="box-meta">
-        <div class="box-meta-item"><i class="fas fa-warehouse"></i> ${box.items.length}</div>
-      </div>
+      <div class="box-meta"><div class="box-meta-item"><i class="fas fa-warehouse"></i> ${box.items.length}</div></div>
       <div class="box-actions">
-        <button class="box-status-btn" onclick="setBoxStatus(${JSON.stringify(box.id)},'empaquetada')" title="← Volver a casa">← VOLVER</button>
-        <button class="box-status-btn" onclick="openEditBoxModal(${JSON.stringify(box.id)})" title="✏️ Editar">✏️</button>
+        <button class="box-status-btn" onclick="setBoxStatus(${box.id},'empaquetada')">← VOLVER</button>
+        <button class="box-status-btn" onclick="openEditBoxModal(${box.id})">✏️</button>
       </div>
-      ${box.items.length?`
-        <button class="box-toggle-btn" onclick="toggleBoxItems(${JSON.stringify(box.id)},this)" id="toggle-${box.id}">▾ Contenido</button>
-        <div class="box-items-section" id="items-${box.id}">
-          ${itemsHtml}
-        </div>
-      `:''}
     `;
     grid.appendChild(card);
   });
@@ -2815,45 +2318,413 @@ function renderLonja(){
   updateLonjaStats();
 }
 
-function updateLonjaStats(){
-  const lonjaBoxes = BOXES.filter(b => b.status === 'llevada');
+function updateLonjaStats() {
+  const lonja = BOXES.filter(b => b.status === 'llevada');
   const total = BOXES.length;
-  const circ = 238.76;
-  const pct = total > 0 ? Math.round(lonjaBoxes.length/total*100) : 0;
+  const pct = total > 0 ? Math.round(lonja.length / total * 100) : 0;
   
-  document.getElementById('lonjaDonutFill').setAttribute('stroke-dasharray', (pct/100*circ) + ' ' + (circ-pct/100*circ));
+  const circ = 238.76;
+  document.getElementById('lonjaDonutFill').setAttribute('stroke-dasharray', (pct / 100 * circ) + ' ' + (circ - pct / 100 * circ));
   document.getElementById('lonjaDonutPct').textContent = pct + '%';
-  document.getElementById('lonjaCount').textContent = lonjaBoxes.length;
+  document.getElementById('lonjaCount').textContent = lonja.length;
   document.getElementById('lonjaTotal').textContent = total;
-  document.getElementById('lanjaNeedTransport').textContent = total - lonjaBoxes.length;
+  document.getElementById('lanjaNeedTransport').textContent = total - lonja.length;
   document.getElementById('lonjaProgress').textContent = pct + '%';
 }
 
-function exportLonjaList(){
-  const lonjaBoxes = BOXES.filter(b => b.status === 'llevada');
-  let text = '📋 LISTA LONJA\n' + '='.repeat(40) + '\n\n';
-  lonjaBoxes.forEach((box,i) => {
+function exportLonjaList() {
+  const lonja = BOXES.filter(b => b.status === 'llevada');
+  let text = '📋 LONJA\n' + '='.repeat(30) + '\n\n';
+  lonja.forEach((box, i) => {
     text += `${i+1}. ${box.label} - ${box.summary}\n`;
     if(box.items.length) box.items.forEach(item => text += `   • ${item}\n`);
     text += '\n';
   });
-  text += '-'.repeat(40) + '\n' + `Total: ${lonjaBoxes.length} cajas\n`;
+  text += 'Total: ' + lonja.length;
   
-  const blob = new Blob([text], {type:'text/plain'});
+  const blob = new Blob([text], {type: 'text/plain'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `lonja-${new Date().toISOString().split('T')[0]}.txt`;
+  a.download = 'lonja.txt';
   a.click();
-  showToast('✓ Lista exportada');
+  showToast('✓ Exportado');
 }
 
-function printLonjaList(){
-  const lonjaBoxes = BOXES.filter(b => b.status === 'llevada');
-  let html = '<h2 style="text-align:center">📋 LISTA LONJA</h2>';
-  html += '<ol>';
-  lonjaBoxes.forEach(box => {
-    html += `<li><strong>${box.label}</strong> - ${box.summary}`;
-    if(box.items.length) {
-      html += '<ul>';
-      box.items.forEach
+// ===== PENDIENTE =====
+function renderPendiente() {
+  const list = document.getElementById('pendienteList');
+  list.innerHTML = '';
+  PENDIENTE.forEach((cat, ci) => {
+    const done = cat.items.filter((_, i) => pendChecks[ci + '-' + i]).length;
+    const div = document.createElement('div');
+    div.className = 'pend-category';
+    div.innerHTML = `
+      <div class="pend-bar-mini"><div class="pend-bar-mini-fill" style="background:var(--gold);width:${cat.items.length ? Math.round(done/cat.items.length*100) : 0}%"></div></div>
+      <div class="pend-cat-header" onclick="togglePend(this)">
+        <span class="pend-icon">${cat.icon}</span>
+        <span class="pend-cat-name">${cat.cat}</span>
+        <span class="pend-progress-mini">${done}/${cat.items.length}</span>
+        <span class="pend-arrow">▾</span>
+      </div>
+      <div class="pend-items">
+        ${cat.items.map((item, ii) => `
+          <div class="pend-item">
+            <input type="checkbox" ${pendChecks[ci + '-' + ii] ? 'checked' : ''} onchange="togglePendCheck(${ci}, ${ii}, this.checked)">
+            <div class="pend-item-body">
+              <div class="pend-item-text">${item.text}</div>
+              ${item.nota ? `<div class="pend-item-nota">→ ${item.nota}</div>` : ''}
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+    list.appendChild(div);
+  });
+}
+
+function togglePend(el) {
+  el.nextElementSibling.classList.toggle('open');
+  el.classList.toggle('open');
+}
+
+function togglePendCheck(ci, ii, checked) {
+  pendChecks[ci + '-' + ii] = checked;
+  localStorage.setItem('mudanza_pendchecks', JSON.stringify(pendChecks));
+  renderPendiente();
+}
+
+function openAddCategoryModal() { openModal('addCategoryModal'); }
+function addCategory() {
+  const icon = document.getElementById('newCatIcon').value || '📦';
+  const name = document.getElementById('newCatName').value.trim();
+  if(!name) return;
+  PENDIENTE.push({cat: name, icon, items: []});
+  closeModal('addCategoryModal');
+  saveAll();
+  renderPendiente();
+}
+
+// ===== TIMELINE =====
+function renderTimeline() {
+  const cont = document.getElementById('timelineContent');
+  cont.innerHTML = '';
+  TIMELINE_EVENTS.forEach(ev => {
+    const dotClass = ev.type === 'today' ? 'today' : ev.type === 'trip' ? 'trip' : ev.type === 'warn' ? 'warn' : '';
+    const cardClass = ev.type === 'today' ? 'highlight-today' : ev.type === 'trip' ? 'highlight-trip' : ev.type === 'warn' ? 'highlight-warn' : '';
+    const div = document.createElement('div');
+    div.className = 'tl-event';
+    div.innerHTML = `
+      <div class="tl-dot-wrap"><div class="tl-dot ${dotClass}"></div></div>
+      <div class="tl-card ${cardClass}">
+        <div class="tl-date">${ev.date}</div>
+        <div class="tl-title">${ev.title}</div>
+        <div class="tl-desc">${ev.desc}</div>
+      </div>
+    `;
+    cont.appendChild(div);
+  });
+}
+
+function openAddEventModal() { openModal('addEventModal'); }
+function addEvent() {
+  const date = document.getElementById('newEvDate').value.trim();
+  const title = document.getElementById('newEvTitle').value.trim();
+  if(!date || !title) return;
+  TIMELINE_EVENTS.push({date, title, type: document.getElementById('newEvType').value, desc: document.getElementById('newEvDesc').value.trim(), bullets: []});
+  closeModal('addEventModal');
+  saveAll();
+  renderTimeline();
+}
+
+// ===== CLEANING =====
+function renderCleaning() {
+  renderCleaningList('cleaningOldList', CLEANING_OLD);
+  renderCleaningList('cleaningNewList', CLEANING_NEW);
+  updateCleaningStats();
+}
+
+function renderCleaningList(id, tasks) {
+  const cont = document.getElementById(id);
+  cont.innerHTML = '';
+  const phases = {prep:'Prep', deep:'Limpieza', final:'Final', new:'Nuevo'};
+  tasks.forEach((t, i) => {
+    const task = document.createElement('div');
+    task.className = 'cleaning-task' + (t.done ? ' done-cleaning' : '');
+    task.innerHTML = `
+      <input type="checkbox" ${t.done ? 'checked' : ''} onchange="toggleCleanTask('${id}', ${i}, this.checked)">
+      <div class="cleaning-task-body">
+        <div class="cleaning-task-name">${t.name}</div>
+        <div class="cleaning-task-meta">${t.meta}</div>
+      </div>
+      <span class="cleaning-phase phase-${t.phase}">${phases[t.phase]}</span>
+    `;
+    cont.appendChild(task);
+  });
+}
+
+function toggleCleanTask(id, idx, checked) {
+  if(id === 'cleaningOldList') CLEANING_OLD[idx].done = checked;
+  else CLEANING_NEW[idx].done = checked;
+  saveAll();
+  renderCleaning();
+}
+
+function updateCleaningStats() {
+  const phases = {prep:0, deep:0, final:0};
+  CLEANING_OLD.forEach(t => { if(t.done) phases[t.phase]++; });
+  const tots = {prep:CLEANING_OLD.filter(t => t.phase === 'prep').length, deep:CLEANING_OLD.filter(t => t.phase === 'deep').length, final:CLEANING_OLD.filter(t => t.phase === 'final').length};
+  
+  document.getElementById('cleanPhasePrep').textContent = phases.prep + '/' + tots.prep;
+  document.getElementById('cleanPhaseDeep').textContent = phases.deep + '/' + tots.deep;
+  document.getElementById('cleanPhaseFinal').textContent = phases.final + '/' + tots.final;
+  
+  const old = CLEANING_OLD.filter(t => t.done).length;
+  const oldT = CLEANING_OLD.length;
+  document.getElementById('cleanOldPct').textContent = oldT ? Math.round(old / oldT * 100) + '%' : '0%';
+  
+  const newD = CLEANING_NEW.filter(t => t.done).length;
+  const newT = CLEANING_NEW.length;
+  document.getElementById('cleanPhaseNew').textContent = newD + '/' + newT;
+  document.getElementById('cleanNewPct').textContent = newT ? Math.round(newD / newT * 100) + '%' : '0%';
+}
+
+function openAddCleaningModal() { openModal('addCleaningModal'); }
+function addCleaningTask() {
+  const name = document.getElementById('newCleanName').value.trim();
+  const meta = document.getElementById('newCleanMeta').value.trim();
+  const phase = document.getElementById('newCleanPhase').value;
+  if(!name) return;
+  const list = phase === 'new' ? CLEANING_NEW : CLEANING_OLD;
+  list.push({id: 'c' + Date.now(), name, meta, phase, done: false});
+  closeModal('addCleaningModal');
+  saveAll();
+  renderCleaning();
+}
+
+// ===== TRAMITES =====
+function renderTramites() {
+  const cont = document.getElementById('tramitesList');
+  cont.innerHTML = '';
+  TRAMITES.forEach((tr, ti) => {
+    const div = document.createElement('div');
+    div.className = 'tramite-card' + (tr.status === 'hecho' ? ' tramite-done' : '');
+    div.innerHTML = `
+      <div class="tramite-header">
+        <span class="tramite-icon">${tr.icon}</span>
+        <div class="tramite-info">
+          <div class="tramite-name">${tr.name}</div>
+          <div class="tramite-sub">${tr.sub}</div>
+        </div>
+        <button class="tramite-status-btn ${tr.status}" onclick="toggleTramite(${ti})">${tr.status === 'hecho' ? '✓ Hecho' : '⏳ Pendiente'}</button>
+      </div>
+      <div class="tramite-steps">
+        ${tr.steps.map((s, si) => `
+          <div class="tramite-step">
+            <input type="checkbox" ${s.done ? 'checked' : ''} onchange="toggleTramiteStep(${ti}, ${si}, this.checked)">
+            <span class="step-num">${s.num}</span>
+            <span class="step-text" style="${s.done ? 'text-decoration:line-through;color:var(--text3)' : ''}">${s.text}</span>
+            ${s.date ? `<span class="step-date">${s.date}</span>` : ''}
+          </div>
+        `).join('')}
+      </div>
+      ${tr.info ? `<div class="tramite-info-box">${tr.info}</div>` : ''}
+    `;
+    cont.appendChild(div);
+  });
+  updateStats();
+}
+
+function toggleTramite(ti) {
+  TRAMITES[ti].status = TRAMITES[ti].status === 'hecho' ? 'pendiente' : 'hecho';
+  saveAll();
+  renderTramites();
+}
+
+function toggleTramiteStep(ti, si, checked) {
+  TRAMITES[ti].steps[si].done = checked;
+  saveAll();
+  renderTramites();
+}
+
+function openAddTramiteModal() { openModal('addTramiteModal'); }
+function addTramite() {
+  const icon = document.getElementById('newTrIcon').value || '📄';
+  const name = document.getElementById('newTrName').value.trim();
+  if(!name) return;
+  TRAMITES.push({icon, name, sub: document.getElementById('newTrSub').value.trim(), status: 'pendiente', steps: [], info: ''});
+  closeModal('addTramiteModal');
+  saveAll();
+  renderTramites();
+}
+
+// ===== BUDGET =====
+const catColors = {transporte:'var(--blue)', materiales:'var(--gold)', tramites:'var(--orange)', nuevo:'var(--green)', limpieza:'var(--blue)', reparaciones:'var(--red)', otros:'var(--text2)'};
+
+function renderBudget() {
+  const list = document.getElementById('budgetList');
+  list.innerHTML = '';
+  let total = 0;
+  BUDGET.forEach((item, i) => {
+    total += Number(item.amount) || 0;
+    const row = document.createElement('div');
+    row.className = 'budget-row';
+    row.innerHTML = `
+      <span class="budget-name">${item.name}</span>
+      <span class="budget-cat-label" style="background:${catColors[item.cat] || 'var(--surface2)'}22;color:${catColors[item.cat] || 'var(--text3)'}">${item.cat}</span>
+      <div class="budget-amount"><input type="number" value="${item.amount}" onchange="updateBudgetItem(${i}, this.value)" style="background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:7px 11px;font-family:'Space Mono',monospace;font-size:0.82rem;color:var(--gold);width:110px;outline:none;text-align:right;font-weight:700"> €</div>
+    `;
+    list.appendChild(row);
+  });
+  document.getElementById('budgetTotal').textContent = total + ' €';
+  
+  const maxAmt = Math.max(...BUDGET.map(b => b.amount), 1);
+  document.getElementById('budgetBarChart').innerHTML = BUDGET.map(b => `
+    <div class="bar-row">
+      <span class="bar-row-label">${b.name.substring(0, 16)}</span>
+      <div class="bar-track"><div class="bar-fill" style="background:${catColors[b.cat] || 'var(--gold)'};width:${Math.round(b.amount / maxAmt * 100)}%"></div></div>
+      <span class="bar-val">${b.amount}€</span>
+    </div>
+  `).join('');
+}
+
+function updateBudgetItem(i, val) {
+  BUDGET[i].amount = Number(val) || 0;
+  saveAll();
+  renderBudget();
+}
+
+// ===== CONTACTS =====
+function renderContacts() {
+  const list = document.getElementById('contactsList');
+  list.innerHTML = '';
+  CONTACTS.forEach((c, i) => {
+    const item = document.createElement('div');
+    item.className = 'contact-item';
+    item.innerHTML = `
+      <span class="contact-emoji">${c.emoji}</span>
+      <div class="contact-body">
+        <div class="contact-name">${c.name}</div>
+        <div class="contact-detail">${c.detail || '(sin datos)'}</div>
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="deleteContact(${i})" style="padding:5px 10px;background:transparent;border:1px solid var(--border);color:var(--text3);cursor:pointer">×</button>
+    `;
+    list.appendChild(item);
+  });
+}
+
+function openAddContactModal() { openModal('addContactModal'); }
+function addContact() {
+  const emoji = document.getElementById('newContactEmoji').value || '👤';
+  const name = document.getElementById('newContactName').value.trim();
+  if(!name) return;
+  CONTACTS.push({emoji, name, detail: document.getElementById('newContactDetail').value.trim()});
+  closeModal('addContactModal');
+  saveAll();
+  renderContacts();
+}
+
+function deleteContact(i) {
+  CONTACTS.splice(i, 1);
+  saveAll();
+  renderContacts();
+}
+
+// ===== SHOPPING =====
+function renderShopping() {
+  const cont = document.getElementById('shoppingList');
+  cont.innerHTML = '';
+  SHOPPING_LIST.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'pend-item';
+    div.innerHTML = `
+      <input type="checkbox" ${item.done ? 'checked' : ''} onchange="toggleShopItem(${i}, this.checked)">
+      <div class="pend-item-body"><div class="pend-item-text">${item.text}</div></div>
+      <button onclick="deleteShopItem(${i})" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:0.8rem;padding:0">×</button>
+    `;
+    cont.appendChild(div);
+  });
+}
+
+function addShoppingItem() {
+  const input = document.getElementById('shoppingInput');
+  if(!input.value.trim()) return;
+  SHOPPING_LIST.push({text: input.value.trim(), done: false});
+  input.value = '';
+  saveAll();
+  renderShopping();
+}
+
+function toggleShopItem(i, checked) {
+  SHOPPING_LIST[i].done = checked;
+  saveAll();
+}
+
+function deleteShopItem(i) {
+  SHOPPING_LIST.splice(i, 1);
+  saveAll();
+  renderShopping();
+}
+
+// ===== EXPORT/IMPORT =====
+function exportData() {
+  const data = {boxes: BOXES, pendiente: PENDIENTE, events: TIMELINE_EVENTS, cleaning_old: CLEANING_OLD, cleaning_new: CLEANING_NEW, tramites: TRAMITES, budget: BUDGET, contacts: CONTACTS, shopping: SHOPPING_LIST, notes: document.getElementById('notesArea').value, newpiso: document.getElementById('newPisoNotes').value};
+  const json = JSON.stringify(data, null, 2);
+  const blob = new Blob([json], {type: 'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'mudanza-backup.json';
+  a.click();
+  showToast('✓ Exportado');
+}
+
+function importData() {
+  document.getElementById('fileImport').click();
+}
+
+function handleFileImport(e) {
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    try {
+      const data = JSON.parse(ev.target.result);
+      BOXES = data.boxes || BOXES;
+      PENDIENTE = data.pendiente || PENDIENTE;
+      TIMELINE_EVENTS = data.events || TIMELINE_EVENTS;
+      CLEANING_OLD = data.cleaning_old || CLEANING_OLD;
+      CLEANING_NEW = data.cleaning_new || CLEANING_NEW;
+      TRAMITES = data.tramites || TRAMITES;
+      BUDGET = data.budget || BUDGET;
+      CONTACTS = data.contacts || CONTACTS;
+      SHOPPING_LIST = data.shopping || SHOPPING_LIST;
+      if(data.notes) document.getElementById('notesArea').value = data.notes;
+      if(data.newpiso) document.getElementById('newPisoNotes').value = data.newpiso;
+      saveAll();
+      renderAll();
+      showToast('✓ Importado');
+    } catch(err) {
+      showToast('❌ Error');
+    }
+  };
+  reader.readAsText(file);
+}
+
+function toggleSettings() {
+  alert('Configuración: Fecha actual ' + currentDate.toLocaleDateString());
+}
+
+// ===== INIT =====
+loadAll();
+updateDate();
+renderAll();
+
+document.querySelectorAll('.modal-overlay').forEach(el => {
+  el.addEventListener('click', function(e) {
+    if(e.target === this) this.classList.remove('open');
+  });
+});
+</script>
+</body>
+</html>
