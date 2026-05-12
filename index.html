@@ -1998,43 +1998,159 @@ let currentDate = new Date(2026, 4, 12);
 const tripStart = new Date(2026, 4, 25);
 
 let BOXES = [
-  {id:1,label:'Caja 1',status:'empaquetada',summary:'Salón',items:['Rumba','Mosquiteras']},
-  {id:2,label:'Caja 2',status:'empaquetada',summary:'Vajilla',items:['Vajilla']},
-  {id:3,label:'Caja 3',status:'empaquetada',summary:'Belleza',items:['Maquillaje']},
+  {id:1,label:'Caja 1',status:'llevada',summary:'Salón varios',items:['Rumba','Mosquiteras','Esterillas','Varios (armario salón)']},
+  {id:2,label:'Caja 2',status:'llevada',summary:'Vajilla',items:['Vajilla']},
+  {id:3,label:'Caja 3',status:'llevada',summary:'Belleza & Skin',items:['Maquillaje','Bisutería','Skincare']},
+  {id:4,label:'Caja 4',status:'llevada',summary:'Decoración',items:['Decoración']},
+  {id:5,label:'Caja 5',status:'llevada',summary:'Mesita de noche',items:['Mesita de noche','Colonias','Cremas','Maquillaje organizado']},
+  {id:6,label:'Caja 6',status:'llevada',summary:'Hobbies & misc',items:['Go Pro','Cera de velas','Cosas caja mimbre','Bolsa de medias']},
+  {id:7,label:'Caja 7',status:'llevada',summary:'Bienestar',items:['Pinturas','Masajeador cervical','Bolsa camping (utensilios plástico)']},
+  {id:8,label:'Caja 8',status:'llevada',summary:'Higiene & Oficina',items:['Higiene (reponer)','Oficina','Varios armario escritorio']},
+  {id:9,label:'Caja 9',status:'llevada',summary:'Bienestar físico',items:['Máquina al vacío','Botiquín','Bloque de Yoga','Inflador','Bolsa agua caliente cuello']},
+  {id:10,label:'Caja 10',status:'llevada',summary:'Cocina aparatos',items:['Exprimidor','Batidora + accesorios','Rallador','Cafetera cápsulas','Plancha de ropa']},
+  {id:11,label:'Caja 11',status:'llevada',summary:'Pendiente de llenar',items:[]},
+  {id:12,label:'Caja 12',status:'llevada',summary:'Navidad I',items:['Árbol de navidad']},
+  {id:13,label:'Caja 13',status:'llevada',summary:'Navidad II',items:['Árbol de navidad']},
+  {id:14,label:'Caja 14',status:'llevada',summary:'Ropa verano',items:['Vestidos','Camisetas','Sudaderas','Bikinis','Ropa de fiesta']},
+  {id:15,label:'Caja 15',status:'llevada',summary:'Ropa invierno',items:['Abrigos + chaquetas','Jerseis invierno','Pijamas de invierno','Calcetines gordos']},
+  {id:16,label:'Caja 16',status:'llevada',summary:'Hobbies caja mimbre',items:['Caja de mimbre – hobbies']},
+  {id:'B1',label:'Bolsa Calzado 1',status:'empaquetada',summary:'Zapatillas',items:['Zapatillas']},
+  {id:'B2',label:'Bolsa Calzado 2',status:'empaquetada',summary:'Tacones',items:['Botas de tacón','Tacones']},
+  {id:'B3',label:'Bolsa Calzado 3',status:'empaquetada',summary:'Botas monte',items:['Botas de monte']},
+  {id:'B4',label:'Bolsa 4',status:'empaquetada',summary:'Misc',items:['Depiladora','Folios','Varios']},
+  {id:'B5',label:'Bolsa 5',status:'empaquetada',summary:'Ropa casa',items:['Ropa de estar en casa','Chándals']},
+  {id:'M1',label:'Maleta Verde',status:'empaquetada',summary:'Ropa colgar',items:['Ropa para colgar','Chaquetas vaqueras','Faldas y pantalones','Camisas y ropa de fiesta','Sudadera Roxy','Chaqueta negra']},
 ];
-let nextBoxId = 100; // will be overwritten by loadAll()
+let nextBoxId = 17; // will be overwritten by loadAll()
 
 let PENDIENTE = [
-  {cat:'Cocina',icon:'🍳',items:[{text:'Ollas',nota:''}]},
-  {cat:'Baño',icon:'🚿',items:[{text:'Toallas',nota:''}]},
+  {cat:'Cocina',icon:'🍳',items:[
+    {text:'Ollas, sartenes y tapas',nota:'Dejar 1 sartén para los últimos días'},
+    {text:'Vasos y copas',nota:''},
+    {text:'Cubiertos',nota:''},
+    {text:'Tápers y fiambreras',nota:''},
+    {text:'Trapos, guantes horno, delantales',nota:''},
+    {text:'Especias y comida seca',nota:'Tirar lo caducado antes'},
+    {text:'Resto menaje pequeño (abrelatas, colador…)',nota:'Caja 11 – pendiente'},
+  ]},
+  {cat:'Baño',icon:'🚿',items:[
+    {text:'Toallas',nota:'Empaquetar las de reserva; dejar 1-2 para los últimos días'},
+    {text:'Artículos en uso (gel, champú, acondicionador)',nota:'Meter en bolsa de plástico por si gotean'},
+    {text:'Secador de pelo',nota:''},
+    {text:'Plancha del pelo / rizador',nota:''},
+    {text:'Alfombrilla de baño',nota:''},
+  ]},
+  {cat:'Dormitorio',icon:'🛏',items:[
+    {text:'Ropa de cama: sábanas, edredón y funda nórdica',nota:'Dejar 1 juego para la última noche'},
+    {text:'Almohadas + fundas',nota:''},
+    {text:'Mantas y nórdico de invierno (máquina al vacío)',nota:'Tienes la máquina en caja 9 🎉'},
+    {text:'Cajones mesita: cargadores, libretas, lo que quede',nota:''},
+  ]},
+  {cat:'Salón / Estantería',icon:'📚',items:[
+    {text:'Libros (fantasía, política, ensayo)',nota:'Pesan — cajas pequeñas o bolsas reforzadas'},
+    {text:'Mando de TV + accesorios sofá',nota:''},
+    {text:'Velas, portavelas y decoración restante',nota:''},
+    {text:'Cables y regletas del salón',nota:''},
+  ]},
+  {cat:'Tecnología & Documentos',icon:'💻',items:[
+    {text:'Portátil + cargador',nota:'Ir contigo en viaje de negocios'},
+    {text:'Auriculares y accesorios',nota:''},
+    {text:'Cables y cargadores varios',nota:'Organiza antes, aprovecha para tirar duplicados'},
+    {text:'Documentos importantes (DNI, contratos, nóminas)',nota:'¡Llevar personalmente, no en caja!'},
+    {text:'Disco duro externo / pendrives',nota:''},
+  ]},
+  {cat:'Plantas 🌿',icon:'🪴',items:[
+    {text:'Pothos, Sansevieria, ZZ Plant, Calathea…',nota:'Empaquetar el DÍA de la mudanza — son lo último en salir'},
+    {text:'Macetas pequeñas en caja con papel de periódico',nota:''},
+  ]},
+  {cat:'Limpieza & Última semana',icon:'🧹',items:[
+    {text:'Productos de limpieza (fregona, recogedor, escoba)',nota:'Usar hasta el último día, dejar para limpieza final'},
+    {text:'Aspiradora',nota:''},
+    {text:'Bolsas de basura',nota:'Dejar siempre unas pocas a mano'},
+  ]},
 ];
 
 let TIMELINE_EVENTS = [
-  {date:'08 Mayo',title:'🚀 Arranca',type:'today',desc:'Mudanza iniciada',bullets:[]},
-  {date:'25 Mayo',title:'✈️ Viaje',type:'trip',days:13,desc:'Fuera de Bilbao',bullets:[]},
+  {date:'08 Mayo · Hoy',title:'🚀 ¡Arranca! Primer transporte a la lonja',type:'today',desc:'Ya llevas 15 cajas empaquetadas 💪 Sigue con cocina y baño esta semana.',bullets:[]},
+  {date:'11 Mayo · Domingo',title:'🚗 Transporte a la lonja del aita',type:'warn',days:3,desc:'¡En 3 días! Primer gran movimiento.',bullets:['Prepara el coche o furgoneta','Lleva las cajas 1-16 + bolsas + maleta verde','Deja en piso solo lo imprescindible para las 2 semanas siguientes']},
+  {date:'12–16 Mayo · Semana 2',title:'📦 Empaquetar cocina, baño y tecnología',type:'normal',days:4,desc:'Objetivo: tenerlo todo en cajas excepto lo que uses a diario.',bullets:['Ollas, cubiertos, menaje','Toallas de reserva, secador, plancha del pelo','Cables, portátil, documentos']},
+  {date:'17–19 Mayo · Fin de semana',title:'📋 Trámites: Endesa y DIGI',type:'normal',days:9,desc:'Semana clave para gestiones. Hazlo antes del viaje.',bullets:['Solicitar cambio titularidad Endesa','Tramitar baja DIGI + contratar nueva línea si aplica','Cambio de dirección en banco y correos']},
+  {date:'20–24 Mayo · Últimos días antes del viaje',title:'🏁 Cierre pre-viaje',type:'warn',days:12,desc:'Todo tiene que estar listo. Semana de margen 0.',bullets:['Limpieza final del piso viejo','Empaquetar plantas (último momento)','Llaves / fianza: gestionar con casero','Dejar solo maleta de viaje de negocios']},
+  {date:'25–29 Mayo · VIAJE',title:'✈️ Viaje de negocios',type:'trip',days:17,desc:'Fuera de Bilbao. Nada de mudanza estos días.',bullets:[]},
+  {date:'30 Mayo – 1 Junio',title:'🏠 MUDANZA FINAL al nuevo piso',type:'normal',days:22,desc:'Último transporte y entrega de llaves del piso antiguo.',bullets:['Recoger todo de la lonja del aita','Entrega de llaves piso viejo + limpieza','Solicitar devolución fianza','Padrón municipal: cambio de domicilio']},
 ];
 
 let CLEANING_OLD = [
-  {id:'co1',name:'Nevera',meta:'Cocina',phase:'prep',done:false},
-  {id:'co2',name:'Horno',meta:'Cocina',phase:'deep',done:false},
+  {id:'co1',name:'Vaciar nevera y descongelarla',meta:'4-5 días antes de salir · Cocina',phase:'prep',done:false},
+  {id:'co2',name:'Tirar comida caducada y vaciar despensa',meta:'Semana del 19/05 · Cocina',phase:'prep',done:false},
+  {id:'co3',name:'Limpiar horno por dentro',meta:'Semana del 12/05 · Cocina',phase:'deep',done:false},
+  {id:'co4',name:'Limpiar campana extractora',meta:'Semana del 12/05 · Cocina',phase:'deep',done:false},
+  {id:'co5',name:'Fregar azulejos cocina',meta:'Semana del 19/05 · Cocina',phase:'deep',done:false},
+  {id:'co6',name:'Limpiar baño a fondo (sanitarios, azulejos, espejo)',meta:'20-23 Mayo · Baño',phase:'deep',done:false},
+  {id:'co7',name:'Limpiar ventanas por dentro',meta:'20-23 Mayo · Todas las habitaciones',phase:'deep',done:false},
+  {id:'co8',name:'Barrer y fregar suelos de todas las habitaciones',meta:'Último día · Todo el piso',phase:'final',done:false},
+  {id:'co9',name:'Pasar aspiradora por rincones y zócalos',meta:'Último día · Todo el piso',phase:'final',done:false},
+  {id:'co10',name:'Limpiar armarios por dentro (vacíos)',meta:'Último día · Dormitorio y salón',phase:'final',done:false},
+  {id:'co11',name:'Revisar que no queda nada olvidado (armarios, cajones, terraza)',meta:'Último día · Todo',phase:'final',done:false},
+  {id:'co12',name:'Fotos del piso vacío y limpio',meta:'Antes de entregar llaves · ¡MUY IMPORTANTE!',phase:'final',done:false},
 ];
 
 let CLEANING_NEW = [
-  {id:'cn1',name:'Revisar',meta:'Primer día',phase:'new',done:false},
+  {id:'cn1',name:'Revisar el estado del piso antes de entrar cosas',meta:'Primer día · Todo el piso',phase:'new',done:false},
+  {id:'cn2',name:'Fotos de cada habitación antes de entrar muebles',meta:'Primer día · ¡MUY IMPORTANTE para fianza!',phase:'new',done:false},
+  {id:'cn3',name:'Limpiar cocina y baños antes de instalar cosas',meta:'Primer día · Cocina + Baño',phase:'new',done:false},
+  {id:'cn4',name:'Fregar suelos de todas las habitaciones',meta:'Antes de colocar muebles',phase:'new',done:false},
+  {id:'cn5',name:'Comprobar que funcionan luces, enchufes y agua',meta:'Primer día · Toda la vivienda',phase:'new',done:false},
+  {id:'cn6',name:'Instalar cortinas o persianas si fueran necesarias',meta:'Primera semana',phase:'new',done:false},
 ];
 
 let TRAMITES = [
-  {icon:'⚡',name:'Endesa',sub:'Cambio titularidad',status:'pendiente',steps:[{num:'01',text:'CUPS',date:'16/05',done:false}],info:''},
-  {icon:'📱',name:'DIGI',sub:'Baja línea',status:'pendiente',steps:[{num:'01',text:'Baja',date:'19/05',done:false}],info:''},
+  {icon:'⚡',name:'Endesa · Cambio de titularidad',sub:'Luz del nuevo piso a tu nombre',status:'pendiente',steps:[
+    {num:'01',text:'Localiza el CUPS del nuevo piso (en factura anterior del propietario)',date:'Antes del 16/05',done:false},
+    {num:'02',text:'Entra en endesaclientes.es → "Cambio de titularidad" o llama al 800 760 900 (gratuito)',date:'17/05',done:false},
+    {num:'03',text:'Ten a mano: DNI, IBAN, dirección nueva y CUPS',date:'17/05',done:false},
+    {num:'04',text:'Confirmar recepción y fecha de activación (suele ser 24-48h)',date:'18-19/05',done:false},
+  ],info:'⚠️ Hazlo antes del viaje (antes del 25/05). Si hay contador con factura anterior, el cambio es casi inmediato.'},
+  {icon:'📱',name:'DIGI · Baja de línea',sub:'Cancelar contrato móvil/internet',status:'pendiente',steps:[
+    {num:'01',text:'Entra en mi.digi.es o en la app → Mis servicios → Solicitar baja',date:'Semana del 19/05',done:false},
+    {num:'02',text:'También puedes llamar al 1200 o escribir al chat de soporte',date:'',done:false},
+    {num:'03',text:'La baja en DIGI es efectiva en 24-48h (sin penalización si has cumplido permanencia)',date:'',done:false},
+    {num:'04',text:'Guarda el email/confirmación de baja',date:'',done:false},
+  ],info:'💡 Si vas a contratar nueva línea en el nuevo piso, hazlo primero para no quedarte sin servicio.'},
+  {icon:'🏛️',name:'Padrón Municipal · Cambio de domicilio',sub:'Ayuntamiento de Bilbao',status:'pendiente',steps:[
+    {num:'01',text:'Trámite online en bilbao.eus o presencial en la Oficina de Atención Ciudadana',date:'Semana del 02/06',done:false},
+    {num:'02',text:'Necesitas: DNI + contrato de alquiler o autorización del propietario',date:'',done:false},
+    {num:'03',text:'Una vez en el padrón nuevo, actualiza DNI si procede (cita previa en Policía Nacional)',date:'Junio',done:false},
+  ],info:''},
+  {icon:'🏦',name:'Banco + Correos + Hacienda',sub:'Cambio de dirección en servicios vinculados',status:'pendiente',steps:[
+    {num:'01',text:'App del banco → Datos personales → Actualizar dirección',date:'02-05/06',done:false},
+    {num:'02',text:'correos.es → Redirección de correo (muy recomendable los primeros 6 meses)',date:'Antes del 01/06',done:false},
+    {num:'03',text:'AEAT (Hacienda): sede.agenciatributaria.gob.es → Mis datos censales',date:'Junio',done:false},
+    {num:'04',text:'Seguridad Social / INSS: actualizar domicilio en importass.seg-social.es',date:'Junio',done:false},
+  ],info:''},
+  {icon:'🔑',name:'Fianza · Devolución piso antiguo',sub:'Recuperar el depósito de garantía',status:'pendiente',steps:[
+    {num:'01',text:'Notificar por escrito (WhatsApp + email) la fecha exacta de entrega de llaves al casero',date:'19-20/05',done:false},
+    {num:'02',text:'Hacer limpieza a fondo y fotos antes de irse',date:'Último día',done:false},
+    {num:'03',text:'Entrega de llaves con el casero presente — firma acta o confirmación escrita',date:'Último día',done:false},
+    {num:'04',text:'La fianza debe devolverse en máx. 1 mes según LAU',date:'Hasta 01/07',done:false},
+  ],info:'⚠️ Guarda todas las fotos del piso al llegar y al irte. Si hay depósito en organismo oficial (Gobierno Vasco), puedes consultarlo online.'},
 ];
 
 let BUDGET = [
-  {name:'Mudanzas',cat:'transporte',amount:300},
-  {name:'Embalaje',cat:'materiales',amount:50},
+  {name:'Empresa de mudanzas / furgoneta',cat:'transporte',amount:300},
+  {name:'Materiales embalaje (cajas, papel, cinta)',cat:'materiales',amount:50},
+  {name:'Redirección de correo (Correos)',cat:'tramites',amount:30},
+  {name:'Cambio cerraduras nuevo piso',cat:'nuevo',amount:80},
+  {name:'Productos limpieza piso viejo',cat:'limpieza',amount:25},
+  {name:'Pequeñas reparaciones piso viejo',cat:'reparaciones',amount:60},
+  {name:'Muebles / artículos nuevo piso',cat:'nuevo',amount:200},
+  {name:'Imprevistos',cat:'otros',amount:100},
 ];
 
 let CONTACTS = [
-  {emoji:'🏠',name:'Casero viejo',detail:''},
+  {emoji:'🏠',name:'Casero piso viejo',detail:''},
+  {emoji:'🏡',name:'Casero piso nuevo',detail:''},
+  {emoji:'👨‍👩‍👧',name:'Aita (lonja)',detail:''},
 ];
 
 let SHOPPING_LIST = [];
@@ -2066,8 +2182,9 @@ function saveAll() {
 function loadAll() {
   if(localStorage.getItem('mudanza_boxes')) BOXES = JSON.parse(localStorage.getItem('mudanza_boxes'));
   // Restore nextBoxId safely — always take the max existing ID + 1 to avoid duplicates
-  const storedNextId = parseInt(localStorage.getItem('mudanza_nextboxid') || '100');
-  const maxExistingId = BOXES.length ? Math.max(...BOXES.map(b => Number(b.id))) : 0;
+  const storedNextId = parseInt(localStorage.getItem('mudanza_nextboxid') || '17');
+  const numericIds = BOXES.map(b => Number(b.id)).filter(n => !isNaN(n));
+  const maxExistingId = numericIds.length ? Math.max(...numericIds) : 16;
   nextBoxId = Math.max(storedNextId, maxExistingId + 1);
   if(localStorage.getItem('mudanza_pendiente')) PENDIENTE = JSON.parse(localStorage.getItem('mudanza_pendiente'));
   if(localStorage.getItem('mudanza_events')) TIMELINE_EVENTS = JSON.parse(localStorage.getItem('mudanza_events'));
