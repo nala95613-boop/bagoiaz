@@ -1961,6 +1961,35 @@ nav.tabs button:hover:not(.active) { color: var(--text2); }
   </div>
 </div>
 
+<div class="modal-overlay" id="editCleaningModal">
+  <div class="modal">
+    <h3><i class="fas fa-broom"></i> Editar tarea</h3>
+    <input type="hidden" id="editCleanListId">
+    <input type="hidden" id="editCleanIdx">
+    <div class="form-group"><label>Tarea</label><input type="text" id="editCleanName" placeholder="Limpiar..."></div>
+    <div class="form-group"><label>Zona</label><input type="text" id="editCleanMeta" placeholder="Cocina..."></div>
+    <div class="form-group"><label>Fase</label>
+      <select id="editCleanPhase">
+        <option value="prep">Preparación</option>
+        <option value="deep">Limpieza fondo</option>
+        <option value="final">Final</option>
+        <option value="new">Piso nuevo</option>
+      </select>
+    </div>
+    <div class="form-group"><label>Lista</label>
+      <select id="editCleanList">
+        <option value="old">Piso viejo</option>
+        <option value="new">Piso nuevo</option>
+      </select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-red" onclick="deleteCleaningTask()">Eliminar</button>
+      <button class="btn btn-outline" onclick="closeModal('editCleaningModal')">Cancelar</button>
+      <button class="btn btn-gold" onclick="saveEditCleaning()">Guardar</button>
+    </div>
+  </div>
+</div>
+
 <input type="file" id="fileImport" style="display:none" accept=".json" onchange="handleFileImport(event)">
 
 <script>
@@ -1973,7 +2002,7 @@ let BOXES = [
   {id:2,label:'Caja 2',status:'empaquetada',summary:'Vajilla',items:['Vajilla']},
   {id:3,label:'Caja 3',status:'empaquetada',summary:'Belleza',items:['Maquillaje']},
 ];
-let nextBoxId = 100;
+let nextBoxId = 100; // will be overwritten by loadAll()
 
 let PENDIENTE = [
   {cat:'Cocina',icon:'🍳',items:[{text:'Ollas',nota:''}]},
@@ -2021,6 +2050,7 @@ function updateDate() {
 
 function saveAll() {
   localStorage.setItem('mudanza_boxes', JSON.stringify(BOXES));
+  localStorage.setItem('mudanza_nextboxid', nextBoxId);
   localStorage.setItem('mudanza_pendiente', JSON.stringify(PENDIENTE));
   localStorage.setItem('mudanza_events', JSON.stringify(TIMELINE_EVENTS));
   localStorage.setItem('mudanza_cleaning_old', JSON.stringify(CLEANING_OLD));
@@ -2035,6 +2065,10 @@ function saveAll() {
 
 function loadAll() {
   if(localStorage.getItem('mudanza_boxes')) BOXES = JSON.parse(localStorage.getItem('mudanza_boxes'));
+  // Restore nextBoxId safely — always take the max existing ID + 1 to avoid duplicates
+  const storedNextId = parseInt(localStorage.getItem('mudanza_nextboxid') || '100');
+  const maxExistingId = BOXES.length ? Math.max(...BOXES.map(b => Number(b.id))) : 0;
+  nextBoxId = Math.max(storedNextId, maxExistingId + 1);
   if(localStorage.getItem('mudanza_pendiente')) PENDIENTE = JSON.parse(localStorage.getItem('mudanza_pendiente'));
   if(localStorage.getItem('mudanza_events')) TIMELINE_EVENTS = JSON.parse(localStorage.getItem('mudanza_events'));
   if(localStorage.getItem('mudanza_cleaning_old')) CLEANING_OLD = JSON.parse(localStorage.getItem('mudanza_cleaning_old'));
@@ -2215,6 +2249,8 @@ function setBoxStatus(id, status) {
     box.status = status;
     saveAll();
     renderCajas();
+    updateStats();
+    if(document.getElementById('tab-lonja').classList.contains('active')) renderLonja();
     showToast(status === 'llevada' ? '🚗 A lonja' : '← De vuelta');
   }
 }
@@ -2458,6 +2494,7 @@ function renderCleaningList(id, tasks) {
         <div class="cleaning-task-meta">${t.meta}</div>
       </div>
       <span class="cleaning-phase phase-${t.phase}">${phases[t.phase]}</span>
+      <button onclick="openEditCleaningModal('${id}', ${i})" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:0.85rem;padding:0 0 0 6px;line-height:1;transition:color 0.15s" title="Editar" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text3)'">✏️</button>
     `;
     cont.appendChild(task);
   });
@@ -2468,6 +2505,63 @@ function toggleCleanTask(id, idx, checked) {
   else CLEANING_NEW[idx].done = checked;
   saveAll();
   renderCleaning();
+}
+
+function openEditCleaningModal(listId, idx) {
+  const task = listId === 'cleaningOldList' ? CLEANING_OLD[idx] : CLEANING_NEW[idx];
+  document.getElementById('editCleanListId').value = listId;
+  document.getElementById('editCleanIdx').value = idx;
+  document.getElementById('editCleanName').value = task.name;
+  document.getElementById('editCleanMeta').value = task.meta;
+  document.getElementById('editCleanPhase').value = task.phase;
+  // Set the "list" selector based on current list
+  document.getElementById('editCleanList').value = listId === 'cleaningOldList' ? 'old' : 'new';
+  openModal('editCleaningModal');
+}
+
+function saveEditCleaning() {
+  const listId = document.getElementById('editCleanListId').value;
+  const idx = parseInt(document.getElementById('editCleanIdx').value);
+  const newName = document.getElementById('editCleanName').value.trim();
+  const newMeta = document.getElementById('editCleanMeta').value.trim();
+  const newPhase = document.getElementById('editCleanPhase').value;
+  const newList = document.getElementById('editCleanList').value;
+  if(!newName) return;
+
+  // Remove from original list
+  const srcList = listId === 'cleaningOldList' ? CLEANING_OLD : CLEANING_NEW;
+  const task = srcList.splice(idx, 1)[0];
+
+  // Update fields
+  task.name = newName;
+  task.meta = newMeta;
+  task.phase = newPhase === 'new' ? 'new' : newPhase;
+
+  // Insert into target list (might be different from source)
+  if(newList === 'old') {
+    task.phase = newPhase === 'new' ? 'prep' : newPhase; // can't put "new" phase in old list
+    CLEANING_OLD.push(task);
+  } else {
+    task.phase = 'new';
+    CLEANING_NEW.push(task);
+  }
+
+  closeModal('editCleaningModal');
+  saveAll();
+  renderCleaning();
+  showToast('✓ Tarea actualizada');
+}
+
+function deleteCleaningTask() {
+  if(!confirm('¿Eliminar esta tarea?')) return;
+  const listId = document.getElementById('editCleanListId').value;
+  const idx = parseInt(document.getElementById('editCleanIdx').value);
+  if(listId === 'cleaningOldList') CLEANING_OLD.splice(idx, 1);
+  else CLEANING_NEW.splice(idx, 1);
+  closeModal('editCleaningModal');
+  saveAll();
+  renderCleaning();
+  showToast('🗑️ Eliminada');
 }
 
 function updateCleaningStats() {
